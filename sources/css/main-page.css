@@ -1,0 +1,227 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Quicksand:wght@300..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Quicksand:wght@300..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@400..800&family=Fredoka:wght@300..700&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Quicksand:wght@300..700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Fredoka';
+}
+
+header {
+    width: 100%;
+    min-height: 80px;
+    background-color: #f5fff5;
+    padding: 20px;
+}
+.header-div {
+    width: 75%;
+    margin: 0 auto;
+    min-height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.logo-name {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.logo {
+    width: 80px;
+    height: 80px;
+}
+
+.name {
+    font-size: 34px;
+    font-weight: 600;
+    font-family: 'Quicksand';
+}
+
+.logo img {
+    width: 100%;
+    height: 100%;
+}
+
+.options {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+#top-contributors,
+#upload-questions {
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    gap: 10px;
+    color: white;
+    background-color: #ff5722;
+    font-size: 18px;
+}
+#login-button{
+    background-color: #546E7A;
+    font-family: 'Quicksand';
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    gap: 10px;
+    color: white;
+    font-size: 18px;
+}
+.quiz-section {
+    width: 100%;
+    min-height: 600px;
+    overflow-y: hidden;
+}
+
+.quiz-section h1 {
+    text-align: center;
+    padding: 40px;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.quiz-section-frontend {
+    width: 75%;
+    min-height: 600px;
+    margin: 0 auto;
+}
+
+.quiz-container {
+    width: 100%;
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.quiz-card {
+    background-color: hsl(120, 8%, 90%);
+    height: 300px;
+    background-color: #f5fff5;
+    border-top: 5px solid #546E7A;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px;
+    position: relative;
+    overflow-y: hidden;
+}
+.language-image{
+    width: 100px;
+    height: 100px;
+}
+.language-image img{
+    width: 100%;
+    height: 100%;
+}
+.progress-overlay{
+    position: absolute;
+   width: 100%;
+bottom: -30px;
+background: rgb(0, 0, 0, 0.7);
+display: flex;
+align-items: center;
+justify-content: center;
+
+}
+.start-quiz-button{
+    padding: 10px 15px;
+background-color: #546E7A;
+color: #f5fff5;
+font-size: 17px;
+font-family: 'Quicksand';
+font-weight: 600;
+border: 2px solid black;
+}
+.start-quiz-button:hover{
+    background-color: #6b8997;
+cursor: pointer;
+}
+#login-div{
+    width: 450px;
+    height: 380px;
+   position: fixed;
+   top: -400px;
+   left: 35%;
+   background-color: #f5fff5;
+   z-index: 100;
+   border: 2px solid black;
+   transition: 0.3s;
+
+}
+#sign-up-div{
+    width: 450px;
+    height: 380px;
+   position: fixed;
+   top: 120px;
+   left: 35%;
+   background-color: #f5fff5;
+   z-index: 100;
+   border: 2px solid black;
+   transition: 0.3s;
+   display: none;
+}
+#login-div form{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 12px;
+    align-items: center;
+}
+#sign-up-div form{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 12px;
+    align-items: center; 
+}
+#login-div form h2{
+    text-align: center;
+    padding: 15px;
+}
+#sign-up-div form h2{
+    text-align: center;
+    padding: 15px;
+}
+#login-div form input, #sign-up-div form  input{
+    padding: 10px;
+    width: 80%;
+}
+#login, #sign-up{
+    width: 80%;
+    padding: 10px;
+    text-align: center;
+}
+#google-loging, #google-sign-up{
+display: flex;
+padding: 10px;
+align-items: center;
+gap: 10px;
+width: 80%;
+border: 1px solid black;
+padding: 10px;
+justify-content: center;
+}
+.google-icon{
+    width: 20px;
+    height: 20px;
+}
+#login-div-close-button,#sign-up-div-close-button{
+    width: 30px;
+    height: 30px;
+    top: 10px;
+    right: 10px;
+    position: absolute;
+}
+#login-div-close-button img, #sign-up-div-close-button img{
+    width: 100%;
+    height: 100%;
+}

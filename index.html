@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./sources/css/main-page.css">
+    <script src="./sources/script/main-page.js" defer type="module"></script>
+    <title>QuizCraft</title>
+</head>
+
+<body>
+    <header id="header">
+        <div class="header-div">
+            <div class="logo-name">
+                <div class="logo">
+                    <img src="./assets/icons/logo-quizcraft.png" alt="Quiz craft logo">
+                </div>
+                <div class="name">QuizCraft</div>
+            </div>
+            <div>
+                <div class="options">
+                    <button id="top-contributors">
+                        <div><img src="./assets/icons/star-medal.png" alt="Star Medal icon" width="20px" height="20px">
+                        </div>
+                        <div>Top Contributors</div>
+                    </button>
+                    <button id="upload-questions">
+                        <div><img src="./assets/icons/upload-icon.png" alt="Upload icon" width="20px" height="20px">
+                        </div>
+                        <div>Upload Questions</div>
+                    </button>
+                    <button id="login-button">
+                        <div><img src="./assets/icons/login-image.png" alt="Upload icon" width="20px" height="20px">
+                        </div>
+                        <div>Login</div>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </header>
+    <main id="main">
+        <section class="quiz-section">
+            <div class="quiz-section-frontend">
+                <h1>FRONTEND</h1>
+                <div class="quiz-container">
+
+                    <div class="quiz-card">
+                        <div class="progress-overlay">
+                            <div class="proress"></div>
+                        </div>
+
+                        <div>HTML</div>
+                        <div class="language-image"><img src="./assets/images/html-image.png" alt="HTML image"></div>
+                        <div style="text-align: center;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus,
+                            in.</div>
+                        <div><button class="start-quiz-button">Start Quiz</button></div>
+                    </div>
+                    <div class="quiz-card">
+                        <div class="progress-overlay">
+                            <div class="proress"></div>
+                        </div>
+
+                        <div>CSS</div>
+                        <div class="language-image"><img src="./assets/images/css-image.png" alt="CSS image"></div>
+                        <div style="text-align: center;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus,
+                            in.</div>
+                        <div><button class="start-quiz-button">Start Quiz</button></div>
+                    </div>
+                    <div class="quiz-card">
+                        <div class="progress-overlay">
+                            <div class="proress"></div>
+                        </div>
+
+                        <div>JAVA SCRIPT</div>
+                        <div class="language-image"><img src="./assets/images/java-script-image.png" alt="HTML image">
+                        </div>
+                        <div style="text-align: center;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus,
+                            in.</div>
+                        <div><button class="start-quiz-button">Start Quiz</button></div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+    </main>
+    <div id="login-div">
+        <form>
+            <h2>Login</h2>
+            <div id="login-div-close-button"><img src="./assets/icons/close-icon.png" alt="close icon"></div>
+            <input type="text" id="email" id="email" placeholder="Enter Your Email">
+            <span id="email-error"></span>
+            <input type="password" id="password" placeholder="Enter Your Password">
+            <span id="password-error"></span>
+            <button id="login">Login</button>
+            <div>------------------------or------------------------</div>
+            <div id="google-loging">
+                <div>
+                    <img src="./assets/icons/google-icon.png" alt="Googel icon" class="google-icon">
+                </div>
+                <div>Login with Google</div>
+
+
+            </div>
+            <div id="sign-up-div-show">Didn't have account</div>
+        </form>
+    </div>
+      <div id="login-div">
+        <form>
+            <h2>Login</h2>
+            <div id="login-div-close-button"><img src="./assets/icons/close-icon.png" alt="close icon"></div>
+            <input type="text" id="login-email" id="email" placeholder="Enter Your Email">
+            <span id="email-error"></span>
+            <input type="password" id="login-password" placeholder="Enter Your Password">
+            <span id="password-error"></span>
+            <button id="login">Login</button>
+            <div>------------------------or------------------------</div>
+            <div id="google-loging">
+                <div>
+                    <img src="./assets/icons/google-icon.png" alt="Googel icon" class="google-icon">
+                </div>
+                <div>Login with Google</div>
+
+
+            </div>
+            <div id="sign-up-div-show">Didn't have account</div>
+        </form>
+    </div>
+    <div id="sign-up-div">
+        <form>
+            <h2>Sing Up</h2>
+            <div id="sign-up-div-close-button"><img src="./assets/icons/close-icon.png" alt="close icon"></div>
+            <input type="text" id="sign-up-email" id="email" placeholder="Enter Your Email">
+            <span id="email-error"></span>
+            <input type="password" id="sign-up-password" placeholder="Enter Your Password">
+            <span id="password-error"></span>
+            <button id="sign-up">Login</button>
+            <div>------------------------or------------------------</div>
+            <div id="google-sign-up">
+                <div>
+                    <img src="./assets/icons/google-icon.png" alt="Googel icon" class="google-icon">
+                </div>
+                <div>Sign up with Google</div>
+
+
+            </div>
+            <div id="login-div-show">Already have account</div>
+        </form>
+    </div>
+</body>
+
+</html>
