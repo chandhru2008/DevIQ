@@ -159,7 +159,7 @@ cursor: pointer;
 }
 #sign-up-div{
     width: 450px;
-    height: 380px;
+    min-height: 380px;
    position: fixed;
    top: 120px;
    left: 35%;
