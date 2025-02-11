@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="../assets/icons/logo-quizcraft.png">
+    <title>QuizCraft HTML Quizes</title>
+    <link rel="stylesheet" href="../sources/css/quiz-questions-page.css">
+    <script src="../sources/script/quiz-questions-page.js" defer type="module"></script>
+</head>
+<body>
+    <header id="header">
+        <div class="header-div">
+            <div class="logo-name">
+                <div class="logo">
+                    <img src="../assets/icons/logo-quizcraft.png" alt="Quiz craft logo">
+                </div>
+                <div class="name">QuizCraft</div>
+            </div>
+            <div>
+                <div class="options">
+                    <button id="top-contributors">
+                        <div><img src="../assets/icons/star-medal.png" alt="Star Medal icon" width="20px" height="20px">
+                        </div>
+                        <div>Top Contributors</div>
+                    </button>
+                    <button id="upload-questions">
+                        <div><img src="../assets/icons/upload-icon.png" alt="Upload icon" width="20px" height="20px">
+                        </div>
+                        <div>Upload Questions</div>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </header>
+    <main>
+        <section>
+            <div id="question-container">
+                <div id="question"></div>
+                <div id="option-1" option-one="1"></div>
+                <div id="option-2" option-two="2"></div>
+                <div id="option-3" option-three="3"></div>
+            </div>
+            
+            <button id="pre-button">previous</button>
+            <button id="next-button">Next</button>
+        </section>
+    </main>
+</body>
+</html>

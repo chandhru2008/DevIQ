@@ -1,0 +1,200 @@
+{
+  "question": [
+    {
+      "language": "html",
+      "question": "What does HTML stand for?",
+      "options": [
+        "Hyper Transfer Markup Language",
+        "Home Tool Markup Language",
+        "Hyper Text Markup Language"
+      ],
+      "answer": 3,
+      "topic": "HTML Basics",
+      "explanation": "HTML stands for Hyper Text Markup Language. It is the standard language used to create and design web pages."
+    },
+    {
+      "language": "html",
+      "question": "Which tag is used to define a link in HTML?",
+      "options": [
+        "a-tag",
+        "link",
+        "href"
+      ],
+      "answer": 1,
+      "topic": "HTML Links",
+      "explanation": "The &lt;a&gt; tag defines hyperlinks in HTML, allowing users to navigate to different web pages or resources."
+    },
+    {
+      "language": "html",
+      "question": "What does the <img> tag do in HTML?",
+      "options": [
+        "Defines a link",
+        "Defines an image",
+        "Defines a list"
+      ],
+      "answer": 2,
+      "topic": "HTML Tags",
+      "explanation": "The <img> tag is used in HTML to embed an image in a web page. It is a self-closing tag that requires the 'src' attribute for the image source."
+    },
+    {
+      "language": "html",
+      "question": "Which attribute is used to specify the destination of a hyperlink?",
+      "options": [
+        "src",
+        "href",
+        "alt"
+      ],
+      "answer": 2,
+      "topic": "HTML Links",
+      "explanation": "The 'href' attribute is used in the <a> tag to specify the destination URL of a hyperlink."
+    },
+    {
+      "language": "html",
+      "question": "How can you add a comment in HTML?",
+      "options": [
+        "<!-- comment -->",
+        "// comment",
+        "# comment"
+      ],
+      "answer": 1,
+      "topic": "HTML Comments",
+      "explanation": "HTML comments are added using the <!-- --> syntax. These comments do not appear on the webpage and are used for developers' notes."
+    },
+    {
+      "language": "html",
+      "question": "What does the <div> tag represent in HTML?",
+      "options": [
+        "A table row",
+        "A block-level container",
+        "A form element"
+      ],
+      "answer": 2,
+      "topic": "HTML Layout",
+      "explanation": "The <div> tag is used as a container to group elements together, typically for styling and layout purposes."
+    },
+    {
+      "language": "html",
+      "question": "Which of the following elements is used to define an ordered list?",
+      "options": [
+        "ul",
+        "li",
+        "ol"
+      ],
+      "answer": 3,
+      "topic": "HTML Lists",
+      "explanation": "The <ol> tag is used to create an ordered list in HTML, while <ul> is used for unordered lists."
+    },
+    {
+      "language": "html",
+      "question": "What is the correct HTML element to define a table header?",
+      "options": [
+        "th",
+        "tr",
+        "td"
+      ],
+      "answer": 1,
+      "topic": "HTML Tables",
+      "explanation": "The &lt;th&gt; tag is used to define a header cell in a table. It is typically displayed in bold and centered."
+    },
+    {
+      "language": "html",
+     "question": "What is the purpose of the 'alt' attribute in the <img> tag?",
+      "options": [
+        "Specifies the width of the image",
+        "Provides an alternative text description for the image",
+        "Defines the image source"
+      ],
+      "answer": 2,
+      "topic": "HTML Accessibility",
+      "explanation": "The 'alt' attribute provides a text description of an image, which is displayed if the image cannot be loaded and helps with accessibility."
+    },
+    {
+      "language": "html",
+      "question": "Which of the following is a valid way to create a table row in HTML?",
+      "options": [
+        "td",
+        "tr",
+        "th"
+      ],
+      "answer": 2,
+      "topic": "HTML Tables",
+      "explanation": "The <tr> tag is used to define a table row, while <td> is used for table data cells and <th> for table headers."
+    }, 
+
+    
+      {
+        "language": "css",
+        "question": "Which property is used to change the text color in CSS?",
+        "options": [
+          "background-color",
+          "text-style",
+          "color"
+        ],
+        "answer": 3,
+        "topic": "CSS Properties",
+        "explanation": "The 'color' property is used to change the text color of an element."
+      },
+      {
+        "language": "css",
+        "question": "Which CSS unit is relative to the font size of the root element?",
+        "options": [
+          "px",
+          "rem",
+          "em"
+        ],
+        "answer": 2,
+        "topic": "CSS Units",
+        "explanation": "The 'rem' unit is relative to the root element's font size, making it useful for scalable designs."
+      },
+      {
+        "language": "css",
+        "question": "Which CSS property is used to create a shadow effect for text?",
+        "options": [
+          "text-shadow",
+          "box-shadow",
+          "shadow-effect"
+        ],
+        "answer": 1,
+        "topic": "CSS Effects",
+        "explanation": "The 'text-shadow' property is used to apply shadow effects to text."
+      },
+      {
+        "language": "css",
+        "question": "Which of the following is a valid way to apply an external CSS file?",
+        "options": [
+          "link rel='stylesheet' href='styles.css'",
+          "<css> styles.css </css>",
+          "<style src='styles.css'></style>"
+        ],
+        "answer": 1,
+        "topic": "CSS Linking",
+        "explanation": "The correct way to link an external CSS file is by using the <link> tag with rel='stylesheet'."
+      },
+      {
+        "language": "css",
+        "question": "Which CSS property controls the order of flexible items in a flex container?",
+        "options": [
+          "flex-order",
+          "order",
+          "z-index"
+        ],
+        "answer": 2,
+        "topic": "CSS Flexbox",
+        "explanation": "The 'order' property specifies the order in which flex items appear within a flex container."
+      },
+      {
+        "language": "css",
+        "question": "Which CSS property is used to create animations?",
+        "options": [
+          "transition",
+          "animation",
+          "transform"
+        ],
+        "answer": 2,
+        "topic": "CSS Animations",
+        "explanation": "The 'animation' property is used to define keyframe animations in CSS."
+      }
+    ]
+    
+  
+}

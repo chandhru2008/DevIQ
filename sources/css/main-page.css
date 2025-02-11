@@ -64,10 +64,10 @@ header {
     background-color: #ff5722;
     font-size: 18px;
 }
-#login-button{
+#login-button, #logout-button{
     background-color: #546E7A;
     font-family: 'Quicksand';
-    display: flex;
+    display: none;
     align-items: center;
     padding: 8px;
     gap: 10px;
@@ -114,6 +114,9 @@ header {
     position: relative;
     overflow-y: hidden;
 }
+.language-name{
+    font-weight: 600;
+}
 .language-image{
     width: 100px;
     height: 100px;
@@ -140,10 +143,12 @@ font-size: 17px;
 font-family: 'Quicksand';
 font-weight: 600;
 border: 2px solid black;
+transition: 0.5s;
 }
 .start-quiz-button:hover{
     background-color: #6b8997;
 cursor: pointer;
+transform: translateY(-5px);
 }
 #login-div{
     width: 450px;
@@ -168,6 +173,13 @@ cursor: pointer;
    border: 2px solid black;
    transition: 0.3s;
    display: none;
+}
+@media (max-width:720px){
+    #login-div, #sign-up-div{
+        left: 0px;
+        width: 95vw;
+        margin-left: 10px;
+    }
 }
 #login-div form{
     display: flex;
@@ -225,3 +237,70 @@ justify-content: center;
     width: 100%;
     height: 100%;
 }
+/* ==================================================================== Log out div =================================================== */
+.logout-confirmation-card {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 360px;
+    height: fit-content;
+    background-color: rgb(255, 250, 250);
+    border-radius: 10px;
+    border: 1px solid rgb(206, 206, 206);
+    display: none;
+    flex-direction: column;
+    align-items:center;
+    justify-content: space-between;
+    padding: 20px;
+    gap: 15px;
+   
+    font-size: 22px;
+    box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.066);
+  }
+  
+  .content-heading {
+    color: rgb(34, 34, 34);
+    font-weight: 800;
+  }
+  .content-para {
+    font-size: 16px;
+    font-weight: 400;
+    color: rgb(51, 51, 51);
+  }
+  .button-wrapper {
+    width: 100%;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  .button-sin-up {
+    width: 50%;
+    padding: 8px 0;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Quicksand';
+    font-size: 15px;
+    font-weight: 500;
+  }
+  .accept {
+    background-color: #ff5722;
+    color: white;
+  }
+  .reject {
+    background-color: #ececec;
+    color: rgb(34, 34, 34);
+  }
+  .accept:hover {
+    background-color: #b95132;
+  }
+  .reject:hover {
+    background-color: #ddd;
+  }
+  .svgIconCross {
+    height: 10px;
+  }
+  /* =================================================================================================== */

@@ -1,14 +1,8 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js";
-// import { getFirestore, collection, doc, getDoc, getDocs, setDoc, addDoc, deleteDoc, updateDoc } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-firestore.js";
-
-import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-auth.js";
-
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-firestore.js";
+import { getDatabase, ref, set, get } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-database.js";
+import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged, signOut, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-auth.js";
 const firebaseConfig = {
     apiKey: "AIzaSyAAsXvl9FI8Ci-08cX5TUhdU2Hp8RoYYjs",
     authDomain: "quiz-craft-project-1.firebaseapp.com",
@@ -22,6 +16,9 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
+const provider = new GoogleAuthProvider();
+const db = getFirestore(app);
+const database = getDatabase(app);
 //============================================= Login and Sign up section ======================================================//
 const loginButton = document.getElementById('login-button');
 const loginDiv = document.getElementById('login-div');
@@ -131,37 +128,152 @@ signUpButton.addEventListener('click', (e) => {
             valid = false;
         }
     }
-//============================================ Sign Up ===================================================//
+     // create a user only if valid
     if (valid) {
-        createUserWithEmailAndPassword(auth, signUpEmailValue, signUpEmailValue)
-            .then((userCredential) => {
-                // Signed up 
-                alert("login aagitu")
-                const user = userCredential.user;
-                // ...
-            })
-            .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                if (errorMessage.includes('auth/email-already-in-use')) {
-                    signUpEmailError.textContent = 'Email Already in use';
-                    setTimeout(() => {
-                        signUpEmailError.textContent = '';
-                    }, 3000);
-                }
-            });
-
+        createUser(signUpEmailValue, signUpPasswordValue) // passing the value as a argumnet to the the function
     }
-});
-//============================================ Login ===================================================//
 
-// signInWithEmailAndPassword(auth, signUpEmailValue, signUpEmailValue)
-//   .then((userCredential) => {
-//     // Signed in 
-//     const user = userCredential.user;
-//     // ...
-//   })
-//   .catch((error) => {
-//     const errorCode = error.code;
-//     const errorMessage = error.message;
-//   });
+});
+    //============================================ Sign Up ===================================================//
+    async function createUser(email, password) {
+        try {
+            const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+            
+            // Use user UID instead of email for database reference
+            const dbRef = ref(database, "users/" + userCredential.user.uid);
+    
+            await set(dbRef, {
+                email: email,  // Store email inside the object, not as a key
+                solvedQuestion : {"placeholder": true},
+                mark : 0
+            });
+            alert('User created successful');
+            window.location.reload();
+    
+        } catch (error) {
+            const errorCode = error.code;
+            console.log(errorCode);
+            if (errorCode.includes('auth/email-already-in-use')) {
+                alert('Email already in use');
+            } else {
+                alert(errorCode + ' - Try after some time');
+            }
+        }
+    }
+    
+//============================================ Login ===================================================//
+const login = document.getElementById('login');
+login.addEventListener('click', (e) => {
+    e.preventDefault();
+    const loginEmail = document.getElementById('login-email');
+    const loginPassword = document.getElementById('login-password');
+    const emailErrorLogin = document.getElementById('email-error');
+    const passwordErrorLogin = document.getElementById('password-error');
+    signInWithEmailAndPassword(auth, loginEmail, loginPassword)
+        .then((userCredential) => {
+            const user = userCredential.user;
+        })
+        .catch((error) => {
+            //  ======================Check for valid user ============================//
+            const errorCode = error.code;
+            if (errorCode === 'auth/invalid-email') {
+                emailErrorLogin.textContent = "Please enter a valid email address.";
+            } else if (errorCode === 'auth/user-disabled') {
+                emailErrorLogin.textContent = "This account has been disabled.";
+            } else if (errorCode === 'auth/user-not-found') {
+                emailErrorLogin.textContent = "No user found with this email.";
+            } else if (errorCode === 'auth/wrong-password') {
+                passwordErrorLogin.textContent = "Incorrect password. Please try again.";
+            } else {
+                passwordErrorLogin.textContent = "Entered Email or password is wrong";
+            }
+        });
+})
+//============================================ Google login ==============================================//
+
+const googleLogin = document.getElementById('google-loging');
+const googleSignUp = document.getElementById('google-sign-up');
+
+async function handleGoogleAuth() {
+    try {
+        const result = await signInWithPopup(auth, provider);
+        const user = result.user; 
+        const userRef = ref(database, "users/" + user.uid); 
+
+      
+        get(userRef).then((snapshot) => {
+            if (!snapshot.exists()) {
+                set(userRef, {
+                    name: user.displayName,
+                    email: user.email,
+                    profilePic: user.photoURL,
+                    numbersOfQuestionsSolved: 0
+                }).then(() => {
+                    console.log("New user added to database!");
+                }).catch((error) => {
+                    console.error("Error storing new user:", error);
+                });
+            } else {
+                console.log("Existing user logged in!");
+            }
+
+            window.location.reload();
+        });
+
+    } catch (error) {
+        console.error("Google Auth Error:", error);
+        alert("Login failed: " + error.message);
+    }
+}
+
+googleLogin.addEventListener("click", handleGoogleAuth);
+googleSignUp.addEventListener("click", handleGoogleAuth);
+
+//============================================= Function to check user is exit or not ==================================================//
+const logOutButton = document.getElementById('logout-button');
+function checkUserExit() {
+    onAuthStateChanged(auth, async (user) => {
+        if (user) {
+            logOutButton.style.display = 'flex';
+
+        } else {
+            console.log('No user found')
+            loginButton.style.display = 'flex'
+        }
+    })
+} 
+checkUserExit();
+//=========================================== Logout confirmation  ==============================================
+const conformDiv = document.getElementsByClassName('logout-confirmation-card')[0];
+logOutButton.addEventListener('click', () => {
+
+    main.style.filter = 'blur(5px)'
+    header.style.filter = 'blur(5px)'
+    conformDiv.style.display = 'flex'
+})
+const acceptButton = document.getElementsByClassName('accept')[0];
+const rejectButton = document.getElementsByClassName('reject')[0];
+acceptButton.addEventListener('click', () => {
+    signOut(auth).then(() => {
+        window.location.reload();
+    }).catch((error) => {
+        // An error happened.
+    });
+});
+rejectButton.addEventListener('click', () => {
+    main.style.filter = 'blur(0px)'
+    header.style.filter = 'blur(0px)'
+    conformDiv.style.display = 'none'
+});
+//=========================================== Pages redirects ====================================================
+
+const startQuizButton = document.getElementsByClassName('start-quiz-button');
+const loginAlert = document.getElementsByClassName('login-alert');
+// console.log(Object.keys(startQuizButton));
+const startQuizButtonArray  = Array.from(startQuizButton);
+startQuizButtonArray.forEach(button => {
+    button.addEventListener('click', (e)=>{
+        const selectedQuiz = e.target.getAttribute('language-name');
+        window.location.href=`../../pages/quiz-questions-page.html?id=${selectedQuiz}`
+    })
+});
