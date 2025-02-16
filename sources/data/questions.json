@@ -22,11 +22,11 @@
       ],
       "answer": 1,
       "topic": "HTML Links",
-      "explanation": "The &lt;a&gt; tag defines hyperlinks in HTML, allowing users to navigate to different web pages or resources."
+      "explanation": "The <code>&lt;a&gt;</code> tag defines hyperlinks in HTML, allowing users to navigate to different web pages or resources."
     },
     {
       "language": "html",
-      "question": "What does the <img> tag do in HTML?",
+      "question": "What does the <code>&lt;img /&gt;</code> tag do in HTML?",
       "options": [
         "Defines a link",
         "Defines an image",
@@ -34,7 +34,7 @@
       ],
       "answer": 2,
       "topic": "HTML Tags",
-      "explanation": "The <img> tag is used in HTML to embed an image in a web page. It is a self-closing tag that requires the 'src' attribute for the image source."
+      "explanation": "The <code><img></code> tag is used in HTML to embed an image in a web page. It is a self-closing tag that requires the 'src' attribute for the image source."
     },
     {
       "language": "html",
@@ -62,7 +62,7 @@
     },
     {
       "language": "html",
-      "question": "What does the <div> tag represent in HTML?",
+      "question": "What does the <code><div></code> tag represent in HTML?",
       "options": [
         "A table row",
         "A block-level container",
@@ -70,7 +70,7 @@
       ],
       "answer": 2,
       "topic": "HTML Layout",
-      "explanation": "The <div> tag is used as a container to group elements together, typically for styling and layout purposes."
+      "explanation": "The <code><div></code> tag is used as a container to group elements together, typically for styling and layout purposes."
     },
     {
       "language": "html",
@@ -82,7 +82,7 @@
       ],
       "answer": 3,
       "topic": "HTML Lists",
-      "explanation": "The <ol> tag is used to create an ordered list in HTML, while <ul> is used for unordered lists."
+      "explanation": "The <code><ol></code> tag is used to create an ordered list in HTML, while <code><ul></code> is used for unordered lists."
     },
     {
       "language": "html",
@@ -94,7 +94,7 @@
       ],
       "answer": 1,
       "topic": "HTML Tables",
-      "explanation": "The &lt;th&gt; tag is used to define a header cell in a table. It is typically displayed in bold and centered."
+      "explanation": "The <code>&lt;th&gt;</code> tag is used to define a header cell in a table. It is typically displayed in bold and centered."
     },
     {
       "language": "html",
@@ -118,7 +118,7 @@
       ],
       "answer": 2,
       "topic": "HTML Tables",
-      "explanation": "The <tr> tag is used to define a table row, while <td> is used for table data cells and <th> for table headers."
+      "explanation": "The <code><tr></code> tag is used to define a table row, while <code><td></code> is used for table data cells and <code><th></code> for table headers."
     }, 
 
     

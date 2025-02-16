@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <link rel="stylesheet" href="./sources/css/main-page.css">
     <link rel="icon" type="image/png" href="./assets/icons/logo-quizcraft.png">
     <script src="./sources/script/main-page.js" defer type="module"></script>
@@ -11,99 +12,107 @@
 </head>
 
 <body>
-    <header id="header">
-        <div class="header-div">
-            <div class="logo-name">
-                <div class="logo">
-                    <img src="./assets/icons/logo-quizcraft.png" alt="Quiz craft logo">
-                </div>
-                <div class="name">QuizCraft</div>
-            </div>
-            <div>
-                <div class="options">
-                    <button id="top-contributors">
-                        <div><img src="./assets/icons/star-medal.png" alt="Star Medal icon" width="20px" height="20px">
-                        </div>
-                        <div>Top Contributors</div>
-                    </button>
-                    <button id="upload-questions">
-                        <div><img src="./assets/icons/upload-icon.png" alt="Upload icon" width="20px" height="20px">
-                        </div>
-                        <div>Upload Questions</div>
-                    </button>
-                    <button id="login-button">
-                        <div><img src="./assets/icons/login-image.png" alt="Upload icon" width="20px" height="20px"
-                                style="vertical-align: middle;">
-                        </div>
-                        <div>Login</div>
-                    </button>
-                    <button id="logout-button">
-                        <div><img src="./assets/icons/log-out-icon.svg" alt="Upload icon" width="20px" height="20px"
-                                style="vertical-align: middle;">
-                        </div>
-                        <div>Logout</div>
-                    </button>
-
-                </div>
-            </div>
-        </div>
-
-    </header>
-    <main id="main">
-        <section class="quiz-section">
-            <div class="quiz-section-frontend">
-                <h1>FRONTEND</h1>
-                <div class="quiz-container">
-
-                    <div class="quiz-card">
-                        <div class="progress-overlay">
-                            <div class="proress"></div>
-                        </div>
-
-                        <div class="language-name">HTML</div>
-                        <div class="language-image"><img src="./assets/images/html-image.png" alt="HTML image"></div>
-                        <div style="text-align: center;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus,
-                            in.</div>
-                        <div><button class="start-quiz-button" language-name="html">Start Quiz</button></div>
-                        <div class="login-alert"></div>
+    <div id="container">
+        <header id="header">
+            <div class="header-div">
+                <div class="logo-name">
+                    <div class="logo">
+                        <img src="./assets/icons/logo-quizcraft.png" alt="Quiz craft logo">
                     </div>
-                    <div class="quiz-card">
-                        <div class="progress-overlay">
-                            <div class="proress"></div>
-                        </div>
+                    <div class="name">QuizCraft</div>
+                </div>
+                <div>
+                    <div class="options">
+                        <button id="top-contributors">
+                            <div><img src="./assets/icons/star-medal.png" alt="Star Medal icon" width="20px"
+                                    height="20px">
+                            </div>
+                            <div>Top Contributors</div>
+                        </button>
+                        <button id="upload-questions">
+                            <div><img src="./assets/icons/upload-icon.png" alt="Upload icon" width="20px" height="20px">
+                            </div>
+                            <div>Upload Questions</div>
+                        </button>
+                        <button id="login-button">
+                            <div><img src="./assets/icons/login-image.png" alt="Upload icon" width="20px" height="20px"
+                                    style="vertical-align: middle;">
+                            </div>
+                            <div>Login</div>
+                        </button>
+                        <button id="logout-button">
+                            <div><img src="./assets/icons/log-out-icon.svg" alt="Upload icon" width="20px" height="20px"
+                                    style="vertical-align: middle;">
+                            </div>
+                            <div>Logout</div>
+                        </button>
 
-                        <div class="language-name">CSS</div>
-                        <div class="language-image"><img src="./assets/images/css-image.png" alt="CSS image"></div>
-                        <div style="text-align: center;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus,
-                            in.</div>
-                        <div><button class="start-quiz-button" language-name="css">Start Quiz</button></div>
-                        <div class="login-alert"></div>
-                    </div>
-                    <div class="quiz-card">
-                        <div class="progress-overlay">
-                            <div class="proress"></div>
-                        </div>
-
-                        <div class="language-name">JAVA SCRIPT</div>
-                        <div class="language-image"><img src="./assets/images/java-script-image.png" alt="HTML image">
-                        </div>
-                        <div style="text-align: center;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus,
-                            in.</div>
-                        <div><button class="start-quiz-button" language-name="js">Start Quiz</button></div>
-                        <div class="login-alert"></div>
                     </div>
                 </div>
             </div>
 
-        </section>
-    </main>
+        </header>
+        <main id="main">
+            <section class="quiz-section">
+                <div class="quiz-section-frontend">
+                    <h1>FRONTEND</h1>
+                    <div class="quiz-container">
+
+                        <div class="quiz-card">
+                            <div class="progress-overlay">
+                                <div class="proress"></div>
+                            </div>
+
+                            <div class="language-name">HTML</div>
+                            <div class="language-image"><img src="./assets/images/html-image.png" alt="HTML image">
+                            </div>
+                            <div style="text-align: center;">Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                Natus,
+                                in.</div>
+                            <div><button class="start-quiz-button" language-name="html">Start Quiz</button></div>
+
+                        </div>
+                        <div class="quiz-card">
+                            <div class="progress-overlay">
+                                <div class="proress"></div>
+                            </div>
+
+                            <div class="language-name">CSS</div>
+                            <div class="language-image"><img src="./assets/images/css-image.png" alt="CSS image"></div>
+                            <div style="text-align: center;">Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                Natus,
+                                in.</div>
+                            <div><button class="start-quiz-button" language-name="css">Start Quiz</button></div>
+
+                        </div>
+                        <div class="quiz-card">
+                            <div class="progress-overlay">
+                                <div class="proress"></div>
+                            </div>
+
+                            <div class="language-name">JAVA SCRIPT</div>
+                            <div class="language-image"><img src="./assets/images/java-script-image.png"
+                                    alt="HTML image">
+                            </div>
+                            <div style="text-align: center;">Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                Natus,
+                                in.</div>
+                            <div><button class="start-quiz-button" language-name="js" F>Start Quiz</button></div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+        </main>
+    </div>
     <div id="login-div">
         <form>
             <h2>Login</h2>
             <div id="login-div-close-button"><img src="./assets/icons/close-icon.png" alt="close icon"></div>
-            <input type="text" id="email" id="email" placeholder="Enter Your Email">
+            <input type="text" id="login-email"  placeholder="Enter Your Email">
             <span id="email-error"></span>
-            <input type="password" id="password" placeholder="Enter Your Password">
+            <input type="password" id="login-email" placeholder="Enter Your Password">
             <span id="password-error"></span>
             <button id="login">Login</button>
 
@@ -124,6 +133,8 @@
         <form>
             <h2>Sing Up</h2>
             <div id="sign-up-div-close-button"><img src="./assets/icons/close-icon.png" alt="close icon"></div>
+            <input type="text" placeholder="Enter your name" id="name">
+            <span id="name-error"></span>
             <input type="text" id="sign-up-email" id="email" placeholder="Enter Your Email">
             <span id="sign-up-email-error"></span>
             <input type="password" id="sign-up-password" placeholder="Enter Your Password">
@@ -148,17 +159,20 @@
             Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eligendi
         </p>
         <div class="button-wrapper">
-            <button class="accept button-sin-up">Conform</button>
+            <button class="accept button-sin-up">Confirm</button>
             <button class="reject button-sin-up">Cancel</button>
         </div>
-        <!-- <button class="exit-button">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 162 162" class="svgIconCross">
-                <path stroke-linecap="round" stroke-width="17" stroke="black" d="M9.01074 8.98926L153.021 153"></path>
-                <path stroke-linecap="round" stroke-width="17" stroke="black" d="M9.01074 153L153.021 8.98926"></path>
-            </svg>
-        </button> -->
     </div>
-
+    <div id="sign-up-login-success-div">
+        <div class="sign-up-login-success-div-image">
+            <img src="./assets/icons/sign-up-login-success-icon.png" alt="">
+        </div>
+        <div id="sign-up-login-success-div-message">
+        </div>
+    </div>
+    <div id="login-alert">
+        Please login to attempt Quizes
+    </div>
 </body>
 
 </html>

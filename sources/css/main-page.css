@@ -15,6 +15,7 @@ header {
     background-color: #f5fff5;
     padding: 20px;
 }
+
 .header-div {
     width: 75%;
     margin: 0 auto;
@@ -64,7 +65,9 @@ header {
     background-color: #ff5722;
     font-size: 18px;
 }
-#login-button, #logout-button{
+
+#login-button,
+#logout-button {
     background-color: #546E7A;
     font-family: 'Quicksand';
     display: none;
@@ -73,7 +76,23 @@ header {
     gap: 10px;
     color: white;
     font-size: 18px;
+    border: 1px solid black;
 }
+#login-button :hover,
+#logout-button:hover{
+    cursor: pointer;
+}
+@media (max-width:720px) {
+
+    #top-contributors,
+    #upload-questions,
+    #login-button,
+    #logout-button {
+        width: 250px;
+        justify-content: center;
+    }
+}
+
 .quiz-section {
     width: 100%;
     min-height: 600px;
@@ -114,135 +133,217 @@ header {
     position: relative;
     overflow-y: hidden;
 }
-.language-name{
+
+.language-name {
     font-weight: 600;
 }
-.language-image{
+
+.language-image {
     width: 100px;
     height: 100px;
 }
-.language-image img{
+
+.language-image img {
     width: 100%;
     height: 100%;
 }
-.progress-overlay{
+
+.progress-overlay {
     position: absolute;
-   width: 100%;
-bottom: -30px;
-background: rgb(0, 0, 0, 0.7);
-display: flex;
-align-items: center;
-justify-content: center;
+    width: 100%;
+    bottom: -30px;
+    background: rgb(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
 }
-.start-quiz-button{
+
+.start-quiz-button {
     padding: 10px 15px;
-background-color: #546E7A;
-color: #f5fff5;
-font-size: 17px;
-font-family: 'Quicksand';
-font-weight: 600;
-border: 2px solid black;
-transition: 0.5s;
+    background-color: #546E7A;
+    color: #f5fff5;
+    font-size: 17px;
+    font-family: 'Quicksand';
+    font-weight: 600;
+    border: 2px solid black;
+    transition: 0.5s;
 }
-.start-quiz-button:hover{
+
+.start-quiz-button:hover {
     background-color: #6b8997;
-cursor: pointer;
-transform: translateY(-5px);
+    cursor: pointer;
+    transform: translateY(-5px);
 }
-#login-div{
+
+#login-div {
     width: 450px;
     height: 380px;
-   position: fixed;
-   top: -400px;
-   left: 35%;
-   background-color: #f5fff5;
-   z-index: 100;
-   border: 2px solid black;
-   transition: 0.3s;
-
+    position: fixed;
+    top: -400px;
+    left: 35%;
+    background-color: #f5fff5;
+    z-index: 100;
+    border: none;
+    transition: 0.3s;
+   border: 2px solid #546e7a;
 }
-#sign-up-div{
+
+#sign-up-div {
     width: 450px;
     min-height: 380px;
-   position: fixed;
-   top: 120px;
-   left: 35%;
-   background-color: #f5fff5;
-   z-index: 100;
-   border: 2px solid black;
-   transition: 0.3s;
-   display: none;
+    position: fixed;
+    top: 120px;
+    left: 35%;
+    background-color: #f5fff5;
+    z-index: 100;
+    border: 2px solid #546e7a;
+    transition: 0.3s;
+    display: none;
+    padding: 10px;
 }
-@media (max-width:720px){
-    #login-div, #sign-up-div{
+
+@media (max-width:720px) {
+
+    #login-div,
+    #sign-up-div {
         left: 0px;
         width: 95vw;
         margin-left: 10px;
     }
 }
-#login-div form{
+
+#login-div form {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     gap: 12px;
     align-items: center;
 }
-#sign-up-div form{
+
+#sign-up-div form {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     gap: 12px;
-    align-items: center; 
+    align-items: center;
 }
-#login-div form h2{
+
+#login-div form h2 {
     text-align: center;
     padding: 15px;
+    font-weight: 400;
 }
-#sign-up-div form h2{
+
+#sign-up-div form h2 {
     text-align: center;
     padding: 15px;
+    font-weight: 400;
 }
-#login-div form input, #sign-up-div form  input{
+
+#login-div form input,
+#sign-up-div form input {
     padding: 10px;
     width: 80%;
+    border: 1px solid black;
+    font-size: 17px;
+    background-color: transparent;
 }
-#login, #sign-up{
+#login-div form input:focus, #sign-up-div form input:focus{
+    border: none;
+    outline: 2px solid #ff5722;
+}
+#login,
+#sign-up {
     width: 80%;
     padding: 10px;
     text-align: center;
+    font-size: 17px;
+    background-color:#546e7a;
+    border: none;
+    color: white;
+    transition: 0.3s;
 }
-#google-loging, #google-sign-up{
-display: flex;
-padding: 10px;
-align-items: center;
-gap: 10px;
-width: 80%;
-border: 1px solid black;
-padding: 10px;
-justify-content: center;
+#login:hover,
+#sign-up:hover{
+    cursor: pointer;
+    background-color: #7096a8;
 }
-.google-icon{
+#google-loging,
+#google-sign-up {
+    display: flex;
+    padding: 10px;
+    align-items: center;
+    gap: 10px;
+    width: 80%;
+    border: 1px solid black;
+    padding: 10px;
+    justify-content: center;
+}
+#google-loging:hover,
+#google-sign-up:hover{
+    cursor: pointer;
+}
+.google-icon {
     width: 20px;
     height: 20px;
 }
-#login-div-close-button,#sign-up-div-close-button{
+
+#login-div-close-button,
+#sign-up-div-close-button {
     width: 30px;
     height: 30px;
     top: 10px;
     right: 10px;
     position: absolute;
 }
-#login-div-close-button img, #sign-up-div-close-button img{
+
+#login-div-close-button img,
+#sign-up-div-close-button img {
     width: 100%;
     height: 100%;
 }
+#login-div-close-button img:hover,
+#sign-up-div-close-button img:hover{
+    cursor: pointer;
+}
+#sign-up-div-show :hover,#login-div-show:hover{
+    cursor: pointer;
+}
+#sign-up-login-success-div {
+    width: 280px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0px 10px;
+    position: fixed;
+    top: -80px;
+    transition: 0.3s;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #07cc66;
+    color: white;
+    font-size: 20px;
+    border-radius: 10px;
+}
+
+.sign-up-login-success-div-image {
+    width: 20%;
+    height: 100%;
+}
+
+.sign-up-login-success-div-image img {
+    width: 100%;
+    height: 100%;
+}
+
 /* ==================================================================== Log out div =================================================== */
 .logout-confirmation-card {
     position: fixed;
     top: 50%;
     left: 50%;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
     width: 360px;
     height: fit-content;
     background-color: rgb(255, 250, 250);
@@ -250,33 +351,36 @@ justify-content: center;
     border: 1px solid rgb(206, 206, 206);
     display: none;
     flex-direction: column;
-    align-items:center;
+    align-items: center;
     justify-content: space-between;
     padding: 20px;
     gap: 15px;
-   
+
     font-size: 22px;
     box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.066);
-  }
-  
-  .content-heading {
+}
+
+.content-heading {
     color: rgb(34, 34, 34);
     font-weight: 800;
-  }
-  .content-para {
+}
+
+.content-para {
     font-size: 16px;
     font-weight: 400;
     color: rgb(51, 51, 51);
-  }
-  .button-wrapper {
+}
+
+.button-wrapper {
     width: 100%;
     height: auto;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 20px;
-  }
-  .button-sin-up {
+}
+
+.button-sin-up {
     width: 50%;
     padding: 8px 0;
     border: none;
@@ -285,22 +389,46 @@ justify-content: center;
     font-family: 'Quicksand';
     font-size: 15px;
     font-weight: 500;
-  }
-  .accept {
+}
+
+.accept {
     background-color: #ff5722;
     color: white;
-  }
-  .reject {
+}
+
+.reject {
     background-color: #ececec;
     color: rgb(34, 34, 34);
-  }
-  .accept:hover {
+}
+
+.accept:hover {
     background-color: #b95132;
-  }
-  .reject:hover {
+}
+
+.reject:hover {
     background-color: #ddd;
-  }
-  .svgIconCross {
+}
+
+.svgIconCross {
     height: 10px;
-  }
-  /* =================================================================================================== */
+}
+
+/* =================================================================================================== */
+#login-alert{
+    position: fixed;
+    top: 15%;
+    opacity: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: opacity 0.3s ease-in-out;
+    color: red;
+    font-size: 20px;
+    font-size: 600;
+}
+@media (max-width:720px){
+    #login-alert{
+        top: 34%;
+        width: 100%;
+        left: 280px;
+    }
+}

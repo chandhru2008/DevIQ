@@ -24,15 +24,14 @@ const loginButton = document.getElementById('login-button');
 const loginDiv = document.getElementById('login-div');
 const main = document.getElementById('main');
 const header = document.getElementById('header');
+const container = document.getElementById('container');
 loginButton.addEventListener('click', () => {
-    main.style.filter = 'blur(5px)';
-    header.style.filter = 'blur(5px)';
+    container.style.filter = 'blur(5px)';
     loginDiv.style.top = '120px';
 });
 const loginDivCloseButton = document.getElementById('login-div-close-button');
 loginDivCloseButton.addEventListener('click', () => {
-    main.style.filter = 'blur(0px)';
-    header.style.filter = 'blur(0px)';
+    container.style.filter = 'blur(0px)';
     loginDiv.style.display = 'block';
     loginDiv.style.top = '-400px';
 
@@ -46,30 +45,41 @@ const signUpDivCloseButton = document.getElementById('sign-up-div-close-button')
 signUpDivCloseButton.addEventListener('click', () => {
     signUpDiv.style.display = 'none';
     loginDiv.style.top = '-400px';
-    header.style.filter = 'blur(0px)';
-    main.style.filter = 'blur(0px)';
+    container.style.filter = 'blur(0px)';
 });
 const loginDivShow = document.getElementById('login-div-show');
 loginDivShow.addEventListener('click', () => {
     signUpDiv.style.display = 'none';
 });
 //=============================================== Form validation =========================================================//
+const name = document.getElementById('name');
+const nameError = document.getElementById('name-error')
 const signUpEmail = document.getElementById('sign-up-email');
 const signUpButton = document.getElementById('sign-up');
 const signUpPassword = document.getElementById('sign-up-password');
+const signUpEmailError = document.getElementById('sign-up-email-error');
+const signUpPasswordError = document.getElementById('sign-up-password-error');
 
 signUpButton.addEventListener('click', (e) => {
     e.preventDefault();
-
+    const nameValue = name.value;
     const signUpEmailValue = signUpEmail.value;
     const signUpPasswordValue = signUpPassword.value;
-    const signUpEmailError = document.getElementById('sign-up-email-error');
-    const signUpPasswordError = document.getElementById('sign-up-password-error');
     signUpPasswordError.textContent = '';
     signUpPasswordError.textContent = '';
     let validEamil = true;
     let valid = true;
-    if (!signUpEmailValue) {
+
+    if (nameValue.length == 0) {
+        const nameError = document.getElementById('name-error')
+            .textContent = "";
+        setTimeout(() => {
+            nameError.textContent = '';
+        }, 2000)
+        validEamil = false;
+        valid = false;
+    }
+    else if (!signUpEmailValue) {
         signUpEmailError.textContent = "Email should not be empty.";
         setTimeout(() => {
             signUpEmailError.textContent = '';
@@ -128,39 +138,48 @@ signUpButton.addEventListener('click', (e) => {
             valid = false;
         }
     }
-     // create a user only if valid
+    // create a user only if valid
     if (valid) {
-        createUser(signUpEmailValue, signUpPasswordValue) // passing the value as a argumnet to the the function
+        createUser(signUpEmailValue, signUpPasswordValue, nameValue) // passing the value as a argumnet to the the function
     }
 
 });
-    //============================================ Sign Up ===================================================//
-    async function createUser(email, password) {
-        try {
-            const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-            
-            // Use user UID instead of email for database reference
-            const dbRef = ref(database, "users/" + userCredential.user.uid);
-    
-            await set(dbRef, {
-                email: email,  // Store email inside the object, not as a key
-                solvedQuestion : {"placeholder": true},
-                mark : 0
-            });
-            alert('User created successful');
-            window.location.reload();
-    
-        } catch (error) {
-            const errorCode = error.code;
-            console.log(errorCode);
-            if (errorCode.includes('auth/email-already-in-use')) {
-                alert('Email already in use');
-            } else {
-                alert(errorCode + ' - Try after some time');
-            }
+//============================================ Sign Up ===================================================//
+
+const signUpLoginSuccessDiv = document.getElementById('sign-up-login-success-div');
+const signUpLoginSuccessDivMessage = document.getElementById('sign-up-login-success-div-message');
+async function createUser(email, password, nameValue) {
+    signUpLoginSuccessDivMessage.innerHTML = '<p>Sign up successfully<span style="color: yellow; padding-left: 10px; font-weight: 500;">:)</span> </p>'
+    try {
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+
+        // Use user UID instead of email for database reference
+        const dbRef = ref(database, "users/" + userCredential.user.uid);
+
+        await set(dbRef, {
+            name: nameValue,
+            email: email,  // Store email inside the object, not as a key
+            solvedTopics: { "placeholder": true },
+            mark: 0
+        });
+        setTimeout(() => {
+            signUpLoginSuccessDiv.style.top = '-90px';
+            window.location.href = '../../index.html'
+        }, 2000);
+
+        signUpLoginSuccessDiv.style.top = '40px';
+
+    } catch (error) {
+        const errorCode = error.code;
+        console.log(errorCode);
+        if (errorCode.includes('auth/email-already-in-use')) {
+            signUpEmailError.innerHTML = 'email-already-in-use';
+        } else {
+            alert(errorCode + ' - Try after some time');
         }
     }
-    
+}
+
 //============================================ Login ===================================================//
 const login = document.getElementById('login');
 login.addEventListener('click', (e) => {
@@ -169,9 +188,26 @@ login.addEventListener('click', (e) => {
     const loginPassword = document.getElementById('login-password');
     const emailErrorLogin = document.getElementById('email-error');
     const passwordErrorLogin = document.getElementById('password-error');
+    if (loginEmail.value.length == 0) {
+        emailErrorLogin.textContent = "Please enter email";
+        setTimeout(() => {
+            emailErrorLogin.textContent = "";
+        }, 3000);
+        e.preventDefault();
+    }
+    if (loginPassword.value.length == 0) {
+        passwordErrorLogin.textContent = "Please enter password";
+        setTimeout(() => {
+            passwordErrorLogin.textContent = "";
+        }, 3000);
+        e.preventDefault();
+    }
+
+
     signInWithEmailAndPassword(auth, loginEmail, loginPassword)
         .then((userCredential) => {
             const user = userCredential.user;
+            console.log(user);
         })
         .catch((error) => {
             //  ======================Check for valid user ============================//
@@ -193,28 +229,30 @@ login.addEventListener('click', (e) => {
 
 const googleLogin = document.getElementById('google-loging');
 const googleSignUp = document.getElementById('google-sign-up');
-
+googleLogin.addEventListener("click", handleGoogleAuth);
+googleSignUp.addEventListener("click", handleGoogleAuth);
 async function handleGoogleAuth() {
     try {
         const result = await signInWithPopup(auth, provider);
-        const user = result.user; 
-        const userRef = ref(database, "users/" + user.uid); 
+        const user = result.user;
+        const userRef = ref(database, "users/" + user.uid);
 
-      
+
         get(userRef).then((snapshot) => {
-            if (!snapshot.exists()) {
+            if (!snapshot.exists()) {  // if newly a user created set their details in real time data base
                 set(userRef, {
                     name: user.displayName,
                     email: user.email,
                     profilePic: user.photoURL,
-                    numbersOfQuestionsSolved: 0
+                    solvedTopics: { "placeholder": true },
+                    mark: 0
                 }).then(() => {
                     console.log("New user added to database!");
                 }).catch((error) => {
                     console.error("Error storing new user:", error);
                 });
             } else {
-                console.log("Existing user logged in!");
+                console.log("Existing user logged in!");  // else we can get the logined user
             }
 
             window.location.reload();
@@ -226,27 +264,26 @@ async function handleGoogleAuth() {
     }
 }
 
-googleLogin.addEventListener("click", handleGoogleAuth);
-googleSignUp.addEventListener("click", handleGoogleAuth);
 
 //============================================= Function to check user is exit or not ==================================================//
-const logOutButton = document.getElementById('logout-button');
+const logOutButton = document.getElementById('logout-button'); // This button is for showing log out and login accurding to user exit or not intially there in display:none 
 function checkUserExit() {
     onAuthStateChanged(auth, async (user) => {
         if (user) {
             logOutButton.style.display = 'flex';
 
+
         } else {
             console.log('No user found')
             loginButton.style.display = 'flex'
+
         }
     })
-} 
+}
 checkUserExit();
 //=========================================== Logout confirmation  ==============================================
 const conformDiv = document.getElementsByClassName('logout-confirmation-card')[0];
 logOutButton.addEventListener('click', () => {
-
     main.style.filter = 'blur(5px)'
     header.style.filter = 'blur(5px)'
     conformDiv.style.display = 'flex'
@@ -254,10 +291,10 @@ logOutButton.addEventListener('click', () => {
 const acceptButton = document.getElementsByClassName('accept')[0];
 const rejectButton = document.getElementsByClassName('reject')[0];
 acceptButton.addEventListener('click', () => {
-    signOut(auth).then(() => {
+    signOut(auth).then(() => { // actuall sing out happening here 
         window.location.reload();
     }).catch((error) => {
-        // An error happened.
+        console.log('Error-->', error)
     });
 });
 rejectButton.addEventListener('click', () => {
@@ -268,12 +305,24 @@ rejectButton.addEventListener('click', () => {
 //=========================================== Pages redirects ====================================================
 
 const startQuizButton = document.getElementsByClassName('start-quiz-button');
-const loginAlert = document.getElementsByClassName('login-alert');
-// console.log(Object.keys(startQuizButton));
-const startQuizButtonArray  = Array.from(startQuizButton);
+const loginAlert = document.getElementById('login-alert');
+const startQuizButtonArray = Array.from(startQuizButton);
 startQuizButtonArray.forEach(button => {
-    button.addEventListener('click', (e)=>{
+    button.addEventListener('click', async (e) => {
         const selectedQuiz = e.target.getAttribute('language-name');
-        window.location.href=`../../pages/quiz-questions-page.html?id=${selectedQuiz}`
+
+        console.log(selectedQuiz)
+        const user = await auth.currentUser;
+        console.log(user)
+        if (!user) {
+            loginAlert.style.opacity = '1'
+            setTimeout(() => {
+                loginAlert.style.opacity = '0'
+            }, 3000)
+        } else {
+            window.location.href = `../../pages/quiz-questions-page.html?id=${selectedQuiz}`
+        }
+
+
     })
 });

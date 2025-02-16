@@ -15,6 +15,7 @@ header {
     background-color: #f5fff5;
     padding: 20px;
 }
+
 .header-div {
     width: 75%;
     margin: 0 auto;
@@ -24,6 +25,10 @@ header {
     align-items: center;
     flex-wrap: wrap;
     gap: 20px;
+}
+
+body {
+    background-color: white;
 }
 
 .logo-name {
@@ -42,7 +47,9 @@ header {
     font-weight: 600;
     font-family: 'Quicksand';
 }
-
+.name:hover{
+  cursor: pointer;
+}
 .logo img {
     width: 100%;
     height: 100%;
@@ -64,7 +71,9 @@ header {
     background-color: #ff5722;
     font-size: 18px;
 }
-#login-button, #logout-button{
+
+#login-button,
+#logout-button {
     background-color: #546E7A;
     font-family: 'Quicksand';
     display: none;
@@ -74,23 +83,331 @@ header {
     color: white;
     font-size: 18px;
 }
-main{
+
+main {
     display: flex;
     align-items: center;
     justify-content: center;
     height: 80dvh;
 }
-#question-container{
-    width: 70dvw;
-    height: auto;
+
+#question-container {
+    width: 55dvw;
+    height: 40dvh;
+    position: relative;
+}
+.details-and-answer-image-div{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: flex-start;
+  width: 25dvw;
+}
+.details-and-answer-image-div h1{
+  font-family: 'Quicksand';
+}
+.question-and-option-details {
+    width: 100%;
+    height: 100%;
     display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+   border-top: 3px solid #546e7a ;
+   border-radius: 20px;
+    padding: 20px;
+    gap: 15px;
+    background: white;
+
+}
+
+#question-container h1 {
+    font-size: 25px;
+    font-weight: 500;
+    /* opacity: 0; */
+}
+
+#question-container p {
+    font-weight: 400;
+    font-size: 21px;
+}
+
+.quiz-section {
+    display: flex;
+    gap: 20px;
     align-items: center;
     justify-content: space-between;
-    flex-direction: column;
-border: #546E7A solid 1px;
-padding: 20px;
+    width: 75%;
 }
-#option-1, #option-2, #option-3{
+@media (max-width:720px){
+  .quiz-section {
+    flex-direction: column-reverse;
+    align-items: center;
+    justify-content: space-between;
+    height: 80%;
     width: 100%;
-    padding: 15px;
+  }
+  #question-container{
+    width: 100%;
+  }
+  .details-and-answer-image-div{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  main{
+    padding: 30px;
+ min-height: 100dvh;
+  }
 }
+.pre-next-button {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    /* opacity: 0; */
+}
+
+.pre-next-button button {
+    padding: 10px;
+    font-size: 24px;
+    width: 47%;
+    align-items: center;
+    justify-content: center;
+}
+
+#option-1,
+#option-2,
+#option-3 {
+    width: 100%;
+    padding: 20px;
+    background-color: #e7eae7;
+    padding: 10px;
+    border: none;
+    font-size: 24px;
+    border-radius: 10px;
+    transition: 0.3s;
+    /* opacity: 0; */
+}
+
+#option-1:hover,
+#option-2:hover,
+#option-3:hover {
+    scale: 1.02;
+    background-color: white;
+    cursor: pointer;
+    border: 1px solid #ff5722;
+}
+
+#answer-div {
+    width: 350px;
+    height: 350px;
+    background-color: #ff5722;
+}
+
+#answer-image-div {
+    width: 250px;
+    height: 250px;
+}
+
+#answer-image-div img {
+    width: 100%;
+    height: 100%;
+}
+
+/* From Uiverse.io by Nawsome */
+.loader {
+    --background: linear-gradient(135deg, #2285ff, #93a7e3);
+    --shadow: #6ea7ec;
+    --text: #6C7486;
+    --page: rgba(255, 255, 255, 0.36);
+    --page-fold: rgba(255, 255, 255, 0.52);
+    --duration: 3s;
+    width: 200px;
+    height: 140px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    display: none;
+  }
+  
+  .loader:before, .loader:after {
+    --r: -6deg;
+    content: "";
+    position: absolute;
+    bottom: 8px;
+    width: 120px;
+    top: 80%;
+    box-shadow: 0 16px 12px var(--shadow);
+    transform: rotate(var(--r));
+  }
+  
+  .loader:before {
+    left: 4px;
+  }
+  
+  .loader:after {
+    --r: 6deg;
+    right: 4px;
+  }
+  
+  .loader div {
+    width: 100%;
+    height: 100%;
+    border-radius: 13px;
+    position: relative;
+    z-index: 1;
+    perspective: 600px;
+    box-shadow: 0 4px 6px var(--shadow);
+    background-image: var(--background);
+  }
+  
+  .loader div ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    position: relative;
+  }
+  
+  .loader div ul li {
+    --r: 180deg;
+    --o: 0;
+    --c: var(--page);
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    transform-origin: 100% 50%;
+    color: var(--c);
+    opacity: var(--o);
+    transform: rotateY(var(--r));
+    -webkit-animation: var(--duration) ease infinite;
+    animation: var(--duration) ease infinite;
+  }
+  
+  .loader div ul li:nth-child(2) {
+    --c: var(--page-fold);
+    -webkit-animation-name: page-2;
+    animation-name: page-2;
+  }
+  
+  .loader div ul li:nth-child(3) {
+    --c: var(--page-fold);
+    -webkit-animation-name: page-3;
+    animation-name: page-3;
+  }
+  
+  .loader div ul li:nth-child(4) {
+    --c: var(--page-fold);
+    -webkit-animation-name: page-4;
+    animation-name: page-4;
+  }
+  
+  .loader div ul li:nth-child(5) {
+    --c: var(--page-fold);
+    -webkit-animation-name: page-5;
+    animation-name: page-5;
+  }
+  
+  .loader div ul li svg {
+    width: 90px;
+    height: 120px;
+    display: block;
+  }
+  
+  .loader div ul li:first-child {
+    --r: 0deg;
+    --o: 1;
+  }
+  
+  .loader div ul li:last-child {
+    --o: 1;
+  }
+  
+  .loader span {
+    display: block;
+    left: 0;
+    right: 0;
+    top: 100%;
+    margin-top: 20px;
+    text-align: center;
+    color: var(--text);
+    color: #ff5722;
+    font-size: 20px;
+  }
+  
+  @keyframes page-2 {
+    0% {
+      transform: rotateY(180deg);
+      opacity: 0;
+    }
+  
+    20% {
+      opacity: 1;
+    }
+  
+    35%, 100% {
+      opacity: 0;
+    }
+  
+    50%, 100% {
+      transform: rotateY(0deg);
+    }
+  }
+  
+  @keyframes page-3 {
+    15% {
+      transform: rotateY(180deg);
+      opacity: 0;
+    }
+  
+    35% {
+      opacity: 1;
+    }
+  
+    50%, 100% {
+      opacity: 0;
+    }
+  
+    65%, 100% {
+      transform: rotateY(0deg);
+    }
+  }
+  
+  @keyframes page-4 {
+    30% {
+      transform: rotateY(180deg);
+      opacity: 0;
+    }
+  
+    50% {
+      opacity: 1;
+    }
+  
+    65%, 100% {
+      opacity: 0;
+    }
+  
+    80%, 100% {
+      transform: rotateY(0deg);
+    }
+  }
+  
+  @keyframes page-5 {
+    45% {
+      transform: rotateY(180deg);
+      opacity: 0;
+    }
+  
+    65% {
+      opacity: 1;
+    }
+  
+    80%, 100% {
+      opacity: 0;
+    }
+  
+    95%, 100% {
+      transform: rotateY(0deg);
+    }
+  }
