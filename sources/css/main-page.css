@@ -36,12 +36,14 @@ header {
 .logo {
     width: 80px;
     height: 80px;
+    border-radius: 50%;
 }
 
 .name {
     font-size: 34px;
     font-weight: 600;
     font-family: 'Quicksand';
+    color: #2b323b;
 }
 
 .logo img {

@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="../assets/icons/logo-quizcraft.png">
-    <title>QuizCraft HTML Quizes</title>
+    <link rel="icon" type="image/png" href="../assets/images/dev-iq-logo.png">
+    <title>DevIQ</title>
     <link rel="stylesheet" href="../sources/css/quiz-questions-page.css">
     <script src="../sources/script/quiz-questions-page.js" defer type="module"></script>
 </head>
@@ -15,9 +15,9 @@
         <div class="header-div">
             <div class="logo-name">
                 <div class="logo">
-                    <img src="../assets/icons/logo-quizcraft.png" alt="Quiz craft logo">
+                    <img src="../assets/images/dev-iq-logo.png" alt="Quiz craft logo">
                 </div>
-                <div class="name">QuizCraft</div>
+                <div class="name">DevIQ</div>
             </div>
             <div>
                 <div class="options">
@@ -38,22 +38,33 @@
     </header>
     <main>
         <section class="quiz-section">
-            
+
             <div class="details-and-answer-image-div">
                 <div>
-                    <h1>Pick an answer</h1>
-                    <p>Your answer:</p>
+                    <h1 id="user-answer-to-show-in-heading"></h1>
                 </div>
-                
+
                 <div id="answer-image-div">
 
                 </div>
-                <div id="explaintion" style="width: 100%;">
+                <div id="explaintion">
 
                 </div>
             </div>
             <div id="question-container">
+                <div id="progress-details">
+                    <div id="number-of-question">
+                        <h1> Question </h1>
+                        <div id="current-question"></div>
+                        <div>Of</div>
+                        <div id="total-question"></div>
+                    </div>
+                    <div id="progress">
+                        <div id="current-progress" style="width: 0%;"></div>
+                    </div>
+                </div>
                 <div class="question-and-option-details">
+
                     <div id="question"></div>
                     <div id="option-1" option-one="1"></div>
                     <div id="option-2" option-two="2"></div>
@@ -62,7 +73,7 @@
                     <div class="pre-next-button">
                         <button id="pre-button">previous</button>
                         <button id="next-button">Next</button>
-
+                        <button id="get-mark">Get mark</button>
                     </div>
 
                 </div>
@@ -120,6 +131,7 @@
 
         </section>
     </main>
+    
 </body>
 
 </html>

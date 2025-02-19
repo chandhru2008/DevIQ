@@ -112,7 +112,7 @@ main {
     display: flex;
     align-items: flex-start;
     flex-direction: column;
-   border-top: 3px solid #546e7a ;
+   /* border-top: 3px solid #546e7a ; */
    border-radius: 20px;
     padding: 20px;
     gap: 15px;
@@ -133,10 +133,21 @@ main {
 
 .quiz-section {
     display: flex;
-    gap: 20px;
+    gap: 40px;
     align-items: center;
     justify-content: space-between;
     width: 75%;
+}
+@media (max-width:1024px){
+  .quiz-section {
+    flex-direction: column-reverse;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    width: 100%;
+    margin-top: 260px;
+    gap: 30px;
+  }
 }
 @media (max-width:720px){
   .quiz-section {
@@ -145,6 +156,7 @@ main {
     justify-content: space-between;
     height: 80%;
     width: 100%;
+    margin-top: 60px;
   }
   #question-container{
     width: 100%;
@@ -217,7 +229,7 @@ main {
 
 /* From Uiverse.io by Nawsome */
 .loader {
-    --background: linear-gradient(135deg, #2285ff, #93a7e3);
+    --background: linear-gradient(135deg, #4fbfe7, #c9cfd6);
     --shadow: #6ea7ec;
     --text: #6C7486;
     --page: rgba(255, 255, 255, 0.36);
@@ -332,7 +344,8 @@ main {
     margin-top: 20px;
     text-align: center;
     color: var(--text);
-    color: #ff5722;
+    color:black;
+    font-weight: 500;
     font-size: 20px;
   }
   
@@ -410,4 +423,33 @@ main {
     95%, 100% {
       transform: rotateY(0deg);
     }
+  }
+  #progress-details{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 20px;
+  }
+  #progress{
+  height: 10px;
+    border-radius: 10px;
+    width: 100%;
+    background-color: white;
+    border: 1px solid black;
+
+  }
+  #number-of-question{
+    display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  }
+  #current-progress{
+    height: 100%;
+    background-color: #4fbfe7;
+    transition: 0.4s;
+    border-radius: 10px;
+  }
+  #get-mark{
+    display: none;
   }
