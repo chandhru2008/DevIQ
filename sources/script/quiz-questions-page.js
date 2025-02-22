@@ -74,7 +74,7 @@ const currentProgress = document.getElementById('current-progress');
 const getMarkButton = document.getElementById('get-mark');
 const userAnswerToShowInHeading = document.getElementById('user-answer-to-show-in-heading');
 
-preButton.style.display = 'none'
+preButton.style.zIndex = '-1'
 let dataArray = [];
 async function fetchJSONFromFirebase() {  // function for get the data from data base
     console.log('this is current user', userId)
@@ -149,7 +149,7 @@ async function fetchJSONFromFirebase() {  // function for get the data from data
             userAnswerToShowInHeading.textContent = 'Pick an option'
             questionExplaination.textContent = ``;
             if (isOptoinSelected) {
-                preButton.style.display = 'block'
+                preButton.style.zIndex = '1'
                 isOptoinSelected = false;
                 loader.style.display = 'block';
                 questionAndOptionDetails.style.opacity = '0';
@@ -238,7 +238,7 @@ async function fetchJSONFromFirebase() {  // function for get the data from data
         preButton.addEventListener('click', async () => {
             userAnswerToShowInHeading.textContent = 'Pick an option'
             if (currentTopic == 1) {
-                preButton.style.display = 'none';
+                preButton.style.zIndex = '-1';
             }
             console.log('this is the current question: ', currentTopic)
             alreadyAnswered = false;
