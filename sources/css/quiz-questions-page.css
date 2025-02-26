@@ -1,12 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Quicksand:wght@300..700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Quicksand:wght@300..700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@400..800&family=Fredoka:wght@300..700&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Quicksand:wght@300..700&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@400..800&family=Fredoka:wght@300..700&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Quicksand:wght@300..700&display=swap');
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Fredoka';
+    font-family: 'Poppins';
 }
 header {
   width: 100%;
@@ -98,13 +98,17 @@ main {
     width: 55dvw;
     height: 40dvh;
     position: relative;
+    transform: translateY(-20%);
 }
+
 .details-and-answer-image-div{
   display: flex;
   flex-direction: column;
-  gap: 20px;
   align-items: flex-start;
-  width: 25dvw;
+  width: 35dvw;
+  height: 40dvh;
+  justify-content: space-between;
+  transform: translateY(-20%);
 }
 .details-and-answer-image-div h1{
   font-family: 'Quicksand';
@@ -124,16 +128,15 @@ main {
 }
 
 #question-container h1 {
-    font-size: 25px;
+    font-size: 20px;
     font-weight: 500;
     /* opacity: 0; */
 }
 
 #question-container p {
     font-weight: 400;
-    font-size: 21px;
+    font-size: 16px;
 }
-
 .quiz-section {
     display: flex;
     gap: 40px;
@@ -146,10 +149,13 @@ main {
     flex-direction: column-reverse;
     align-items: center;
     justify-content: space-between;
-    height: 100%;
+    height: 900px;
     width: 100%;
     margin-top: 260px;
     gap: 30px;
+  }
+  main{
+    margin-top: 80px;
   }
 }
 @media (max-width:600px){
@@ -168,6 +174,9 @@ main {
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 30px;
   }
   main{
  min-height: 100dvh;
@@ -259,6 +268,7 @@ header{
     width: 47%;
     align-items: center;
     justify-content: center;
+<<<<<<< HEAD
     border-radius: 10px;
     border: none;
     background-color: #4fbfe7;
@@ -266,6 +276,13 @@ header{
 }
 .pre-next-button button:hover{
   cursor: pointer;
+=======
+    background-color: #4fbfe7;
+    color: white;
+    border: none;
+    border-radius: 15px;
+
+>>>>>>> 655a086f6a22ccf792a6de751ee523859e702f69
 }
 #option-1,
 #option-2,
@@ -275,7 +292,7 @@ header{
     background-color: #e7eae7;
     padding: 10px;
     border: none;
-    font-size: 24px;
+    font-size: 18px;
     border-radius: 10px;
     transition: 0.3s;
     /* opacity: 0; */
@@ -297,8 +314,8 @@ header{
 }
 
 #answer-image-div {
-    width: 250px;
-    height: 250px;
+    width: 200px;
+    height: 200px;
 }
 
 #answer-image-div img {
@@ -534,12 +551,19 @@ header{
   }
   footer{
     width: 100%;
+<<<<<<< HEAD
     height: 30dvh;
     background-color: #2b323b;
+=======
+    height: 300px;
+    background-color: #546E7A;
+    font-size: 18px;
+>>>>>>> 655a086f6a22ccf792a6de751ee523859e702f69
 }
 .footer{
     width: 75%;
     margin: 0 auto;
+<<<<<<< HEAD
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -637,3 +661,33 @@ gap: 10px;
 .reject:hover {
   background-color: #ddd;
 }
+=======
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    justify-content: center;
+    color: #f5fff5;
+}
+.footer-section-logo-and-name{
+display: flex;
+align-items: center;
+gap: 10px;
+font-size: 26px;
+font-weight: 500;
+}
+.footer-section-logo-and-name img{
+    width: 40px;
+    height: 40px;
+}
+.follow-pages img{
+    width: 40px;
+    height: 40px;
+}
+.follow-pages{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+>>>>>>> 655a086f6a22ccf792a6de751ee523859e702f69
