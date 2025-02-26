@@ -162,12 +162,14 @@ main {
   .quiz-section {
     flex-direction: column-reverse;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     width: 100%;
-    margin: 20px;
+    margin: 30px 10px;
+    
   }
   #question-container{
     width: 100%;
+    margin-top: 30px;
   }
   .details-and-answer-image-div{
     width: 100%;
@@ -176,7 +178,7 @@ main {
     align-items: center;
     gap: 15px;
     justify-content: center;
-    margin-top: 30px;
+    margin-top: 70px;
   }
   main{
  min-height: 100dvh;
@@ -268,7 +270,7 @@ header{
     width: 47%;
     align-items: center;
     justify-content: center;
-<<<<<<< HEAD
+
     border-radius: 10px;
     border: none;
     background-color: #4fbfe7;
@@ -276,13 +278,11 @@ header{
 }
 .pre-next-button button:hover{
   cursor: pointer;
-=======
+
     background-color: #4fbfe7;
     color: white;
     border: none;
     border-radius: 15px;
-
->>>>>>> 655a086f6a22ccf792a6de751ee523859e702f69
 }
 #option-1,
 #option-2,
@@ -551,19 +551,17 @@ header{
   }
   footer{
     width: 100%;
-<<<<<<< HEAD
+
     height: 30dvh;
     background-color: #2b323b;
-=======
+
     height: 300px;
     background-color: #546E7A;
     font-size: 18px;
->>>>>>> 655a086f6a22ccf792a6de751ee523859e702f69
 }
 .footer{
     width: 75%;
     margin: 0 auto;
-<<<<<<< HEAD
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -661,15 +659,8 @@ gap: 10px;
 .reject:hover {
   background-color: #ddd;
 }
-=======
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-    justify-content: center;
-    color: #f5fff5;
-}
+
+  
 .footer-section-logo-and-name{
 display: flex;
 align-items: center;
@@ -690,4 +681,4 @@ font-weight: 500;
     align-items: center;
     gap: 15px;
 }
->>>>>>> 655a086f6a22ccf792a6de751ee523859e702f69
+
