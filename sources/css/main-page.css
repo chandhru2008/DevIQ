@@ -11,15 +11,17 @@
 
 header {
     width: 100%;
-    min-height: 80px;
+    height: 120px;
     background-color: #f5fff5;
     padding: 20px;
+    position: relative;
+    transition: 0.3s;
+    z-index: 100;
 }
 
 .header-div {
     width: 75%;
     margin: 0 auto;
-    min-height: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -84,8 +86,62 @@ header {
 #logout-button:hover{
     cursor: pointer;
 }
+#hammer{
+    position: absolute;
+    top: 20px;
+    right: 10px;
+    display: none;
+}
+#hammer:hover{
+    cursor: pointer;
+}
+@media (max-width:1170px) {
+    header{
+        overflow-y: hidden;
+        height: 80px;
+    }
+    .header-show{
+        height: 150px;
+        overflow-y: hidden;
+        z-index: 100;
+        padding: 20px;
+        position: fixed;
+        border-bottom: 2px solid gray;
+    }
+    .logo{
+        width: 40px;
+        height: 40px;
+    }
+    #hammer{
+        display: block;
+    }
+}
+/* @media (max-width:1184px){
+    .header-show{
+        height: 200px;
+        overflow-y: hidden;
+        z-index: 100;
+        padding: 20px;
+    }
+    #hammer{
+        display: block;
+    }
+} */
 @media (max-width:720px) {
+header{
+    overflow-y: hidden;
+    height: 80px;
+   
+}
 
+.header-show{
+    height: 300px;
+    overflow-y: hidden;
+    z-index: 100;
+    padding: 20px;
+    border-bottom: 2px solid gray;
+    position: fixed;
+}
     #top-contributors,
     #upload-questions,
     #login-button,
@@ -93,8 +149,17 @@ header {
         width: 250px;
         justify-content: center;
     }
+    #hammer{
+        display: block;
+    }
 }
+.container-2{
+    position: absolute;
+    width: 100%;
+    top:100px;
+    right: 0px;
 
+}
 .quiz-section {
     width: 100%;
     min-height: 600px;
@@ -433,4 +498,40 @@ header {
         width: 100%;
         left: 280px;
     }
+}
+footer{
+    width: 100%;
+    height: 30dvh;
+    background-color: #2b323b;
+}
+.footer{
+    width: 75%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    height: 100%;
+    font-size: 18px;
+    color: white;
+}
+.footer-section-logo{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+   font-size: 24px;
+}
+.footer-section-logo img{
+    width: 60px;
+    height: 60px;
+}
+.social-links{
+display: flex;
+align-items: center;
+gap: 10px;
+}
+.social-links img{
+    width: 50px;
+    height: 50px;
 }

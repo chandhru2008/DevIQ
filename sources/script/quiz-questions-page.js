@@ -1,7 +1,7 @@
 // Import Firebase
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js";
 import { getDatabase, ref, set, get, update, push } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-database.js";
-import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged, signOut, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-auth.js";
+import { getAuth,  onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-auth.js";
 
 // Your Firebase config
 const firebaseConfig = {
@@ -18,7 +18,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth();
 const database = getDatabase(app);
-const questionContainer = document.getElementById('question');
+
 const logo = document.getElementsByClassName('logo')[0];
 let userId;
 onAuthStateChanged(auth, async (user) => {
@@ -57,9 +57,11 @@ uploadJSONToFirebase();
 //======================================================================================================================
 
 
-//========================= Fetching the data from real time data base and handle logic's ============================== 
+//========================= Fetching the data from real time data base and handle logic's ==============================
+const container = document.getElementById('container'); 
 const nextButton = document.getElementById('next-button');
 const preButton = document.getElementById('pre-button');
+const questionContainer = document.getElementById('question');
 const optionOneDiv = document.getElementById('option-1');
 const optionTwoDiv = document.getElementById('option-2');
 const optionThreeDiv = document.getElementById('option-3');
@@ -71,10 +73,11 @@ const questionExplaination = document.getElementById('explaintion');
 const totalQuestion = document.getElementById('total-question');
 const currentQuestion = document.getElementById('current-question');
 const currentProgress = document.getElementById('current-progress');
-const getMarkButton = document.getElementById('get-mark');
+const finishQuize = document.getElementById('finish-quize');
 const userAnswerToShowInHeading = document.getElementById('user-answer-to-show-in-heading');
+const reviewAnswerAndGetScoresDiv = document.getElementsByClassName('get-mark-confirmation-card')[0];
 
-preButton.style.display = 'none'
+preButton.style.zIndex = '-1'
 let dataArray = [];
 async function fetchJSONFromFirebase() {  // function for get the data from data base
     console.log('this is current user', userId)
@@ -137,10 +140,10 @@ async function fetchJSONFromFirebase() {  // function for get the data from data
             console.log('option-3: ', userelectedQuestion.val())
 
         }
-        questionContainer.textContent = `${dataArray[0].question}`;
-        optionOneDiv.textContent = `${dataArray[0].options[0]}`
-        optionTwoDiv.textContent = `${dataArray[0].options[1]}`
-        optionThreeDiv.textContent = `${dataArray[0].options[2]}`
+        questionContainer.innerHTML = `<p>${dataArray[0].question}</p>`;
+        optionOneDiv.innerHTML = `<p>${dataArray[0].options[0]}</p>`
+        optionTwoDiv.innerHTML = `<p>${dataArray[0].options[1]}</p>`
+        optionThreeDiv.innerHTML = `<p>${dataArray[0].options[2]}</p>`
 
 
        
@@ -149,7 +152,7 @@ async function fetchJSONFromFirebase() {  // function for get the data from data
             userAnswerToShowInHeading.textContent = 'Pick an option'
             questionExplaination.textContent = ``;
             if (isOptoinSelected) {
-                preButton.style.display = 'block'
+                preButton.style.zIndex = '1'
                 isOptoinSelected = false;
                 loader.style.display = 'block';
                 questionAndOptionDetails.style.opacity = '0';
@@ -175,7 +178,7 @@ async function fetchJSONFromFirebase() {  // function for get the data from data
                     currentTopic++
                     if (currentTopic == dataArray.length - 1) {
                         nextButton.style.display = 'none';
-                        getMarkButton.style.display = 'block';
+                        finishQuize.style.display = 'block';
                         currentProgress.style.width = `${(100 / dataArray.length) * (currentTopic + 1)}%`;
                     }
 
@@ -238,7 +241,7 @@ async function fetchJSONFromFirebase() {  // function for get the data from data
         preButton.addEventListener('click', async () => {
             userAnswerToShowInHeading.textContent = 'Pick an option'
             if (currentTopic == 1) {
-                preButton.style.display = 'none';
+                preButton.style.zIndex = '-1';
             }
             console.log('this is the current question: ', currentTopic)
             alreadyAnswered = false;
@@ -331,12 +334,12 @@ async function fetchJSONFromFirebase() {  // function for get the data from data
                     console.log('This is the topic in firestore: ' + topic.val())
                     console.log('This is the topic in local: ' + dataArray[currentTopic].topic)
                 }
-                questionContainer.textContent = `${dataArray[currentTopic].question}`;
-                optionOneDiv.textContent = `${dataArray[currentTopic].options[0]}`
-                optionTwoDiv.textContent = `${dataArray[currentTopic].options[1]}`
-                optionThreeDiv.textContent = `${dataArray[currentTopic].options[2]}`
+                questionContainer.innerHTML = `<p>${dataArray[currentTopic].question}</p>`;
+                optionOneDiv.innerHTML = `<p>${dataArray[currentTopic].options[0]}</p>`
+                optionTwoDiv.innerHTML = `<p>${dataArray[currentTopic].options[1]}</p>`
+                optionThreeDiv.innerHTML = `<p>${dataArray[currentTopic].options[2]}</p>`
 
-                getMarkButton.style.display='none';
+                finishQuize.style.display='none';
 
             }
         })
@@ -468,19 +471,14 @@ async function fetchJSONFromFirebase() {  // function for get the data from data
                 }
             }
         })
-        getMarkButton.addEventListener('click', async () => {
-            console.log('This function is working the id: ' + dataArray.length);
-            console.log('This function is working the id: ' + id);
-            let mark = 0;
-            for (let i = 0; i < 10; i++) {
-                const solvedTopicsRef = ref(database, 'users/' + userId + '/solvedTopics/' + `/${id}/` + dataArray[i].topic);
-                const data = await get(solvedTopicsRef)
-                if (data.val().isUserAnswerCorrect) {
-                    mark++;
-                }
-
-            }
-            console.log('This is the mark of the user', mark);
+        const acceptButton = document.getElementsByClassName('accept')[0];
+        acceptButton.addEventListener('click',()=>{
+            window.location.href=`../../pages/review-page.html?language=${id}&userId=${userId}`;
+        })
+        finishQuize.addEventListener('click', async () => {
+            currentProgress.style.width = `${100}%`
+            reviewAnswerAndGetScoresDiv.style.display='flex';
+            container.style.filter='blur(5px)'
         });
 
     } else {
@@ -490,3 +488,7 @@ async function fetchJSONFromFirebase() {  // function for get the data from data
 }
 
 fetchJSONFromFirebase();
+const hammerButton = document.getElementById('hammer');
+hammerButton.addEventListener('click',()=>{
+header.classList.toggle('header-show');
+});

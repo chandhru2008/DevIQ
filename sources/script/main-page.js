@@ -326,3 +326,8 @@ startQuizButtonArray.forEach(button => {
 
     })
 });
+const hammerButton = document.getElementById('hammer');
+hammerButton.addEventListener('click',()=>{
+header.classList.toggle('header-show');
+});
+

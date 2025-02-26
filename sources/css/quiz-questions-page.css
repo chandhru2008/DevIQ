@@ -8,12 +8,14 @@
     box-sizing: border-box;
     font-family: 'Fredoka';
 }
-
 header {
-    width: 100%;
-    min-height: 80px;
-    background-color: #f5fff5;
-    padding: 20px;
+  width: 100%;
+  height: 120px;
+  background-color: #f5fff5;
+  padding: 20px;
+  position: relative;
+  transition: 0.3s;
+  z-index: 100;
 }
 
 .header-div {
@@ -29,6 +31,7 @@ header {
 
 body {
     background-color: white;
+    height: auto;
 }
 
 .logo-name {
@@ -149,14 +152,13 @@ main {
     gap: 30px;
   }
 }
-@media (max-width:720px){
+@media (max-width:600px){
   .quiz-section {
     flex-direction: column-reverse;
     align-items: center;
     justify-content: space-between;
-    height: 80%;
     width: 100%;
-    margin-top: 60px;
+    margin: 20px;
   }
   #question-container{
     width: 100%;
@@ -168,8 +170,80 @@ main {
     align-items: center;
   }
   main{
-    padding: 30px;
  min-height: 100dvh;
+ margin: 20px 0px;
+ 
+  }
+}
+.container-2{
+  position: absolute;
+  width: 100%;
+  top:100px;
+  right: 0px;
+
+}
+#hammer{
+  position: absolute;
+  top: 20px;
+  right: 10px;
+  display: none;
+}
+@media (max-width:1170px) {
+  header{
+      overflow-y: hidden;
+      height: 80px;
+  }
+  .header-show{
+      height: 150px;
+      overflow-y: hidden;
+      z-index: 100;
+      padding: 20px;
+      position: fixed;
+      border-bottom: 2px solid gray;
+  }
+  .logo{
+      width: 40px;
+      height: 40px;
+  }
+  /* #hammer{
+      display: block;
+  } */
+}
+/* @media (max-width:1184px){
+  .header-show{
+      height: 200px;
+      overflow-y: hidden;
+      z-index: 100;
+      padding: 20px;
+  }
+  #hammer{
+      display: block;
+  }
+} */
+@media (max-width:835px) {
+header{
+  overflow-y: hidden;
+  height: 80px;
+ 
+}
+
+.header-show{
+  height: 210px;
+  overflow-y: hidden;
+  z-index: 100;
+  padding: 20px;
+  border-bottom: 2px solid gray;
+  position: fixed;
+}
+  #top-contributors,
+  #upload-questions,
+  #login-button,
+  #logout-button {
+      width: 250px;
+      justify-content: center;
+  }
+  #hammer{
+      display: block;
   }
 }
 .pre-next-button {
@@ -177,7 +251,6 @@ main {
     width: 100%;
     align-items: center;
     justify-content: space-between;
-    /* opacity: 0; */
 }
 
 .pre-next-button button {
@@ -186,8 +259,14 @@ main {
     width: 47%;
     align-items: center;
     justify-content: center;
+    border-radius: 10px;
+    border: none;
+    background-color: #4fbfe7;
+    color: white;
 }
-
+.pre-next-button button:hover{
+  cursor: pointer;
+}
 #option-1,
 #option-2,
 #option-3 {
@@ -450,6 +529,111 @@ main {
     transition: 0.4s;
     border-radius: 10px;
   }
-  #get-mark{
+  #finish-quize{
     display: none;
   }
+  footer{
+    width: 100%;
+    height: 30dvh;
+    background-color: #2b323b;
+}
+.footer{
+    width: 75%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    height: 100%;
+    font-size: 18px;
+    color: white;
+}
+.footer-section-logo{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+   font-size: 24px;
+}
+.footer-section-logo img{
+    width: 60px;
+    height: 60px;
+}
+.social-links{
+display: flex;
+align-items: center;
+gap: 10px;
+}
+.social-links img{
+    width: 50px;
+    height: 50px;
+}
+.get-mark-confirmation-card {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 360px;
+  height: fit-content;
+  background-color: rgb(255, 250, 250);
+  border-radius: 10px;
+  border: 1px solid rgb(206, 206, 206);
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  gap: 15px;
+gap: 10px;
+  font-size: 22px;
+  box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.066);
+}
+
+.content-heading {
+  color: rgb(34, 34, 34);
+  font-weight: 800;
+}
+
+.content-para {
+  font-size: 16px;
+  font-weight: 400;
+  color: rgb(51, 51, 51);
+}
+
+.button-wrapper {
+  width: 100%;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.button-sin-up {
+  width: 50%;
+  padding: 8px 0;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: 'Quicksand';
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.accept {
+  background-color: #ff5722;
+  color: white;
+}
+
+.reject {
+  background-color: #ececec;
+  color: rgb(34, 34, 34);
+}
+
+.accept:hover {
+  background-color: #b95132;
+}
+
+.reject:hover {
+  background-color: #ddd;
+}
