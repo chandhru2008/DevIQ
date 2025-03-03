@@ -19,32 +19,49 @@ const database = getDatabase(app);
 
 const urlParams = new URLSearchParams(window.location.search);
 const language = urlParams.get('language');
-const userId = urlParams.get('userId');
 const container = document.getElementById('container');
-console.log(language,userId)
+let userId = null;
+onAuthStateChanged(auth,async(user)=>{
+    userId = user.uid;
+    console.log(userId)
+})
+setTimeout(()=>{
+    getUserSolvedQuestionsDetails()
+},3000);
 
-getUserSolvedQuestionsDetails()
 async function getUserSolvedQuestionsDetails(){
-    let result = [];
+    let userAnswerDeatails = [];
+    let dataArray = [];
     const userSolvedQuestionsRef = ref(database, 'users/' + userId + '/solvedTopics/' + `${language}`);
+    const questionsRef = ref(database,'questions/' + '/question');
     try{
+        const questions = await get(questionsRef);
+        questions.forEach(data => {
+          dataArray.push(data.val());
+        });
+        console.log(dataArray)
         const data = await get(userSolvedQuestionsRef);
+        console.log(data);
         const dataValue = data.val();
+        console.log('This is userDoc', dataValue)
        
         for(let key in dataValue){
-            result.push(dataValue[key]);
+            userAnswerDeatails.push(dataValue[key]);
         }
 
-        console.log(result)
+        console.log(userAnswerDeatails)
     }catch(e){
-        console.log('Error', e.errorMessage);
+        console.log('Error', e.code);
     }
-    for(let i = 0; i < result.length; i++){
+
+    console.log(typeof(userAnswerDeatails[0].correctOption));
+    console.log(dataArray[0].options[userAnswerDeatails[0].correctOption])
+    for(let i = 0; i < userAnswerDeatails.length; i++){
         const childOfTheContainer =   document.createElement('div');
         childOfTheContainer.classList.add('child-of-the-container')
-        childOfTheContainer.innerHTML=`<p>${result[i].topic}</p>`;
+        childOfTheContainer.innerHTML=`<p>${userAnswerDeatails[i].topic}</p>`;
 
-        if(result[i].isUserAnswerCorrect){
+        if(userAnswerDeatails[i].isUserAnswerCorrect){
             childOfTheContainer.style.backgroundColor='green';
         }else{
             childOfTheContainer.style.backgroundColor='red';

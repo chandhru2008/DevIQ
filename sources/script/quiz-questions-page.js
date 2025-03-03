@@ -473,7 +473,7 @@ async function fetchJSONFromFirebase() {  // function for get the data from data
         })
         const acceptButton = document.getElementsByClassName('accept')[0];
         acceptButton.addEventListener('click',()=>{
-            window.location.href=`../../pages/review-page.html?language=${id}&userId=${userId}`;
+            window.location.href=`../../pages/review-page.html?language=${id}`;
         })
         finishQuize.addEventListener('click', async () => {
             currentProgress.style.width = `${100}%`
