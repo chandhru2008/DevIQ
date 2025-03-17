@@ -37,7 +37,10 @@ async function getUserSolvedQuestionsDetails(){
     try{
         const questions = await get(questionsRef);
         questions.forEach(data => {
-          dataArray.push(data.val());
+          let value = data.val();
+          if(value.language == language){
+            dataArray.push(value);
+          }
         });
         console.log(dataArray)
         const data = await get(userSolvedQuestionsRef);
@@ -57,17 +60,47 @@ async function getUserSolvedQuestionsDetails(){
     console.log(typeof(userAnswerDeatails[0].correctOption));
     console.log(dataArray[0].options[userAnswerDeatails[0].correctOption])
     for(let i = 0; i < userAnswerDeatails.length; i++){
-        const childOfTheContainer =   document.createElement('div');
-        childOfTheContainer.classList.add('child-of-the-container')
-        childOfTheContainer.innerHTML=`<p>${userAnswerDeatails[i].topic}</p>`;
 
+const answer = document.getElementById('title');
         if(userAnswerDeatails[i].isUserAnswerCorrect){
-            childOfTheContainer.style.backgroundColor='green';
+        //     childOfTheContainer.style.backgroundColor='green';
+        container.innerHTML+=`
+<div class="card">
+<div class="card-fornd">
+<p>${userAnswerDeatails[i].topic}</p>
+  <img src="../../assets/images/right-answer-image.png" width="100" height="100px">
+
+  </div>
+  <div class="card__content">
+     <div>${userAnswerDeatails[i].question}</div>
+    <p class="card__title">Your answer</p>
+    <p class="card__description">${dataArray[i].options[userAnswerDeatails[i].correctOption]}</p>
+     <p class="card__title">Correct answer</p>
+    <p class="card__description">${dataArray[i].options[userAnswerDeatails[i].userSelectedOption]}</p>
+  </div>
+</div>
+`;
         }else{
-            childOfTheContainer.style.backgroundColor='red';
+        //     childOfTheContainer.style.backgroundColor='red';
+        container.innerHTML+=`
+<div class="card">
+  <div class="card-fornd">
+<p>${userAnswerDeatails[i].topic}</p>
+  <img src="../../assets/images/wrong-answer-image.png" width="100" height="100px">
+
+  </div>
+  <div class="card__content">
+    <div>${userAnswerDeatails[i].question}</div>
+    <p class="card__title">Your answer</p>
+   <p class="card__description">${dataArray[i].options[userAnswerDeatails[i].correctOption]}</p>
+        <p class="card__title">Correct answer</p>
+    <p class="card__description">${dataArray[i].options[userAnswerDeatails[i].userSelectedOption]}</p>
+  </div>
+</div>
+`;
         }
 
-        container.appendChild(childOfTheContainer);
+        // container.appendChild(childOfTheContainer);
       }
 }
 setTimeout(()=>{

@@ -74,18 +74,6 @@
     },
     {
       "language": "html",
-      "question": "Which of the following elements is used to define an ordered list?",
-      "options": [
-        "ul",
-        "li",
-        "ol"
-      ],
-      "answer": 3,
-      "topic": "HTML Lists",
-      "explanation": "The <code><ol></code> tag is used to create an ordered list in HTML, while <code><ul></code> is used for unordered lists."
-    },
-    {
-      "language": "html",
       "question": "What is the correct HTML element to define a table header?",
       "options": [
         "th",

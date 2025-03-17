@@ -23,14 +23,13 @@ const logo = document.getElementsByClassName('logo')[0];
 let userId;
 onAuthStateChanged(auth, async (user) => {
     if (user) {
-        console.log(user.uid);
         userId = user.uid;
     }
 });
 //========================================================= getting the url params using the to show the quizes ==================
 const param = new URLSearchParams(window.location.search);
 const id = param.get('id');
-console.log(id);
+
 
 //================================================================================================================================
 logo.addEventListener('click', () => {
@@ -47,14 +46,15 @@ async function uploadJSONToFirebase() {
         const dbRef = ref(database, "questions/");
 
         await set(dbRef, jsonData);
-        console.log("JSON uploaded successfully to Firebase Realtime Database!");
     } catch (error) {
         console.error("Error uploading JSON:", error);
     }
 }
 uploadJSONToFirebase();
 
-//======================================================================================================================
+//====================================================================================================================
+
+
 
 
 //========================= Fetching the data from real time data base and handle logic's ==============================
@@ -80,70 +80,82 @@ const reviewAnswerAndGetScoresDiv = document.getElementsByClassName('get-mark-co
 preButton.style.zIndex = '-1'
 let dataArray = [];
 async function fetchJSONFromFirebase() {  // function for get the data from data base
-    console.log('this is current user', userId)
     const dbRef = ref(database, "questions/");
     const snapshot = await get(dbRef);
-    let currentTopic = 0;
+  
+    const numberOfQuestionUsersolved = ref(database, 'users/' + userId + '/solvedTopics/' + `${id}`);
 
+
+    const userSolvedQuestions = await get(numberOfQuestionUsersolved);
+    let count = 0;
+    userSolvedQuestions.forEach((d)=>{
+        count++;
+    });
+
+    let currentTopic = count;
+
+    console.log(currentProgress);
+    console.log(currentTopic);
 
     if (snapshot.exists()) {
         const data = snapshot.val();
-        console.log('This is data-1', data.question)
-
         data.question.forEach(element => {
-            console.log(element)
-
-            console.log("This is element id", element.language);
-            console.log("This is the id", id)
             if (element.language == id) {
-                dataArray.push(element)
-                console.log("This is data", element)
+                dataArray.push(element);
             }
         });
+
+        console.log(dataArray)
+        currentProgress.style.width = `${(100 / dataArray.length) * (currentTopic)}%`;
+        if(currentTopic>0){
+            console.log(currentTopic);
+           preButton.style.zIndex = '1'
+        }
+        console.log(dataArray.length)
+        console.log(currentTopic);
+        if(currentTopic >= dataArray.length){
+            const body = document.body;
+            body.innerHTML = `<p>See your score</p>`;
+            body.style.display = "flex";
+            body.style.alignItems = "center";
+            body.style.justifyContent = "center";
+            body.style.height = "100dvh";
+            return ;
+        }
+        console.log((100/dataArray.length) * (currentTopic+1));
+        currentQuestion.textContent = `${currentTopic + 1}`
         totalQuestion.textContent = `${dataArray.length}`
         userAnswerToShowInHeading.textContent = 'Pick an option';
         let isOptoinSelected = false;
         let alreadyAnswered = true;
-        console.log(dataArray)
-        const correcAnswerRef = dataArray[0].answer
-        currentQuestion.textContent = `${1}`
+        const correcAnswerRef = dataArray[count].answer;
 
-        const userSelectedQuestionRef = ref(database, 'users/' + userId + '/solvedTopics/' + `/${id}/` + dataArray[0].topic + '/userSelectedOption/');
-        // const correctQuestionRef = ref(database, 'users/' + userId + '/solvedTopics/' + `/${id}/` + dataArray[currentTopic].topic + '/correctOption/');
+        const userSelectedQuestionRef = ref(database, 'users/' + userId + '/solvedTopics/' + `/${id}/` + dataArray[count].topic + '/userSelectedOption/');
+
         const userelectedQuestion = await get(userSelectedQuestionRef);
-        console.log(userSelectedQuestionRef)
-        // console.log(correcAnswerRef == userSelectedQuestionRef.val());
+
 
         if (userelectedQuestion.val() == 1) {
             alreadyAnswered = false;
             isOptoinSelected = true;
-            questionExplaination.textContent=`${dataArray[0].explanation}`
-            console.log(correcAnswerRef == userelectedQuestion.val())
+            questionExplaination.textContent=`${dataArray[count].explanation}`
             correcAnswerRef == userelectedQuestion.val() ? (optionOneDiv.style.backgroundColor = 'green', optionOneDiv.style.color = 'white', answerImageDiv.innerHTML = `<img src="../../assets/images/right-answer-image.png">`, userAnswerToShowInHeading.textContent = 'Correct') : (optionOneDiv.style.backgroundColor = 'red', optionOneDiv.style.color = 'white', answerImageDiv.innerHTML = `<img src="../../assets/images/wrong-answer-image.png">`, userAnswerToShowInHeading.textContent = 'Incorrect');
-            console.log('option-1: ', userelectedQuestion.val())
         } else if (userelectedQuestion.val() == 2) {
             alreadyAnswered = false;
             isOptoinSelected = true;
              questionExplaination.textContent=`${dataArray[0].explanation}`
-            console.log(correcAnswerRef == userelectedQuestion.val())
             correcAnswerRef == userelectedQuestion.val() ? (optionTwoDiv.style.backgroundColor = 'green', optionTwoDiv.style.color = 'white', answerImageDiv.innerHTML = `<img src="../../assets/images/right-answer-image.png">`, userAnswerToShowInHeading.textContent = 'Correct') : (optionTwoDiv.style.backgroundColor = 'red', optionTwoDiv.style.color = 'white', answerImageDiv.innerHTML = `<img src="../../assets/images/wrong-answer-image.png">`, userAnswerToShowInHeading.textContent = 'Incorrect');
-            console.log('option-2: ', userelectedQuestion.val())
         } else if (userelectedQuestion.val() == 3) {
             alreadyAnswered = false;
             isOptoinSelected = true;
              questionExplaination.textContent=`${dataArray[0].explanation}`
-            console.log(correcAnswerRef == userelectedQuestion.val())
-            console.log('This is correct answer: ', correcAnswerRef);
-            console.log('This is correct answer: ', userelectedQuestion.val());
-            console.log(correcAnswerRef == userelectedQuestion.val());
             correcAnswerRef == userelectedQuestion.val() ? (optionThreeDiv.style.backgroundColor = 'green', optionThreeDiv.style.color = 'white', answerImageDiv.innerHTML = `<img src="../../assets/images/right-answer-image.png">`, userAnswerToShowInHeading.textContent = 'Correct') : (optionThreeDiv.style.backgroundColor = 'red',  optionThreeDiv.style.color = 'white', answerImageDiv.innerHTML = `<img src="../../assets/images/wrong-answer-image.png">`, userAnswerToShowInHeading.textContent = 'Incorrect');
-            console.log('option-3: ', userelectedQuestion.val())
 
         }
-        questionContainer.innerHTML = `<p>${dataArray[0].question}</p>`;
-        optionOneDiv.innerHTML = `<p>${dataArray[0].options[0]}</p>`
-        optionTwoDiv.innerHTML = `<p>${dataArray[0].options[1]}</p>`
-        optionThreeDiv.innerHTML = `<p>${dataArray[0].options[2]}</p>`
+        questionContainer.innerHTML = `<p>${dataArray[count].question}</p>`;
+        optionOneDiv.innerHTML = `<p>${dataArray[count].options[0]}</p>`
+        optionTwoDiv.innerHTML = `<p>${dataArray[count].options[1]}</p>`
+        optionThreeDiv.innerHTML = `<p>${dataArray[count].options[2]}</p>`
 
 
        
@@ -171,9 +183,6 @@ async function fetchJSONFromFirebase() {  // function for get the data from data
                 optionTwoDiv.style.color = 'black';
                 optionThreeDiv.style.color = 'black';
 
-
-                console.log('this is curret topic before ', currentTopic);
-                console.log('this is dataArray length', dataArray.length)
                 if (currentTopic < dataArray.length) {
                     currentTopic++
                     if (currentTopic == dataArray.length - 1) {
@@ -182,8 +191,6 @@ async function fetchJSONFromFirebase() {  // function for get the data from data
                         currentProgress.style.width = `${(100 / dataArray.length) * (currentTopic + 1)}%`;
                     }
 
-                    console.log('this is curret topic', currentTopic);
-                    console.log('this is dataArray length', dataArray.length)
 
                     currentQuestion.textContent = `${currentTopic + 1}`
                     currentProgress.style.width = `${(100 / dataArray.length) * (currentTopic)}%`;
@@ -191,33 +198,23 @@ async function fetchJSONFromFirebase() {  // function for get the data from data
                     const userSelectedQuestionRef = ref(database, 'users/' + userId + '/solvedTopics/' + `/${id}/` + dataArray[currentTopic].topic + '/userSelectedOption/');
                     // const correctQuestionRef = ref(database, 'users/' + userId + '/solvedTopics/' + `/${id}/` + dataArray[currentTopic].topic + '/correctOption/');
                     const userelectedQuestion = await get(userSelectedQuestionRef);
-                    console.log(userSelectedQuestionRef)
-                    // console.log(correcAnswerRef == userSelectedQuestionRef.val());
+
 
                     if (userelectedQuestion.val() == 1) {
                         alreadyAnswered = false;
                         isOptoinSelected = true;
                         questionExplaination.textContent = `${dataArray[currentTopic].explanation}`;
-                        console.log(correcAnswerRef == userelectedQuestion.val())
                         correcAnswerRef == userelectedQuestion.val() ? (optionOneDiv.style.backgroundColor = 'green', optionOneDiv.style.color = 'white', answerImageDiv.innerHTML = `<img src="../../assets/images/right-answer-image.png">`, userAnswerToShowInHeading.textContent = 'Correct') : (optionOneDiv.style.backgroundColor = 'red', optionOneDiv.style.color = 'white', answerImageDiv.innerHTML = `<img src="../../assets/images/wrong-answer-image.png">`, userAnswerToShowInHeading.textContent = 'Incorrect');
-                        console.log('option-1: ', userelectedQuestion.val())
                     } else if (userelectedQuestion.val() == 2) {
                         alreadyAnswered = false;
                         isOptoinSelected = true;
                         questionExplaination.textContent = `${dataArray[currentTopic].explanation}`;
-                        console.log(correcAnswerRef == userelectedQuestion.val())
                         correcAnswerRef == userelectedQuestion.val() ? (optionTwoDiv.style.backgroundColor = 'green', optionTwoDiv.style.color = 'white', answerImageDiv.innerHTML = `<img src="../../assets/images/right-answer-image.png">`, userAnswerToShowInHeading.textContent = 'Correct') : (optionTwoDiv.style.backgroundColor = 'red', optionTwoDiv.style.color = 'white', answerImageDiv.innerHTML = `<img src="../../assets/images/wrong-answer-image.png">`, userAnswerToShowInHeading.textContent = 'Incorrect');
-                        console.log('option-2: ', userelectedQuestion.val())
                     } else if (userelectedQuestion.val() == 3) {
                         alreadyAnswered = false;
                         isOptoinSelected = true;
                         questionExplaination.textContent = `${dataArray[currentTopic].explanation}`;
-                        console.log(correcAnswerRef == userelectedQuestion.val())
-                        console.log('This is correct answer: ', correcAnswerRef);
-                        console.log('This is correct answer: ', userelectedQuestion.val());
-                        console.log(correcAnswerRef == userelectedQuestion.val());
                         correcAnswerRef == userelectedQuestion.val() ? (optionThreeDiv.style.backgroundColor = 'green', optionThreeDiv.style.color = 'white', answerImageDiv.innerHTML = `<img src="../../assets/images/right-answer-image.png">`, userAnswerToShowInHeading.textContent = 'Correct') : (optionThreeDiv.style.backgroundColor = 'red', optionThreeDiv.style.color = 'white', answerImageDiv.innerHTML = `<img src="../../assets/images/wrong-answer-image.png">`, userAnswerToShowInHeading.textContent = 'Incorrect');
-                        console.log('option-3: ', userelectedQuestion.val())
 
                     }
                     questionContainer.innerHTML = `<h1>${dataArray[currentTopic].question}</h1>`;
@@ -225,7 +222,6 @@ async function fetchJSONFromFirebase() {  // function for get the data from data
                     optionTwoDiv.innerHTML = `<p>${dataArray[currentTopic].options[1]}</p>`
                     optionThreeDiv.innerHTML = `<p>${dataArray[currentTopic].options[2]}</p>`
 
-                    console.log(currentTopic)
 
 
                 }
@@ -243,7 +239,6 @@ async function fetchJSONFromFirebase() {  // function for get the data from data
             if (currentTopic == 1) {
                 preButton.style.zIndex = '-1';
             }
-            console.log('this is the current question: ', currentTopic)
             alreadyAnswered = false;
             isOptoinSelected = true;
             optionOneDiv.style.backgroundColor = '#e7eae7';
@@ -266,18 +261,16 @@ async function fetchJSONFromFirebase() {  // function for get the data from data
 
                 currentProgress.style.width = `${(100 / dataArray.length) * (currentTopic)}%`
                 currentQuestion.textContent = `${currentTopic}`;
-                console.log('THIS IS CURRENT TOPIC', currentTopic)
+
             }
             if (currentTopic > 0) {
                 currentQuestion.textContent = `${currentTopic}`
                 currentTopic--
 
-                console.log('THIS IS CURRENT TOPIC', currentTopic)
                 currentProgress.style.width = `${(100 / dataArray.length) * (currentTopic)}%`
                 nextButton.style.display = 'block';
 
 
-                console.log('pre button clicked')
                 const solvedTopicsRef = ref(database, 'users/' + userId + '/solvedTopics/' + `/${id}/` + dataArray[currentTopic].topic + '/topic/');
                 const userSelectedQuestionRef = ref(database, 'users/' + userId + '/solvedTopics/' + `/${id}/` + dataArray[currentTopic].topic + '/userSelectedOption/');
                 const correctQuestionRef = ref(database, 'users/' + userId + '/solvedTopics/' + `/${id}/` + dataArray[currentTopic].topic + '/correctOption/');
@@ -286,12 +279,8 @@ async function fetchJSONFromFirebase() {  // function for get the data from data
                 const userelectedQuestion = await get(userSelectedQuestionRef);
                 const correctQestion = await get(correctQuestionRef);
 
-                console.log('This is the correct answer', correctQestion.val());
-                console.log('This is the correct answer', userelectedQuestion.val());
-
                 if (userelectedQuestion.val() == 1) {
                     alreadyAnswered = false;
-                    console.log(correctQestion.val() == userelectedQuestion.val())
                     if (correctQestion.val() == userelectedQuestion.val()) {
                         questionExplaination.textContent = `${dataArray[currentTopic].explanation}`;
                         optionOneDiv.style.backgroundColor = 'green';
@@ -307,32 +296,26 @@ async function fetchJSONFromFirebase() {  // function for get the data from data
                         userAnswerToShowInHeading.textContent = 'Incorrect'
                     }
 
-                    console.log('option-1: ', userelectedQuestion.val())
+
                 } else if (userelectedQuestion.val() == 2) {
                     questionExplaination.textContent = `${dataArray[currentTopic].explanation}`;
                     alreadyAnswered = false;
-                    console.log(correctQestion.val() == userelectedQuestion.val())
+
                     correctQestion.val() == userelectedQuestion.val() ? (optionTwoDiv.style.backgroundColor = 'green', optionTwoDiv.style.color = 'white', answerImageDiv.innerHTML = `<img src="../../assets/images/right-answer-image.png">`, userAnswerToShowInHeading.textContent = 'Correct') : (optionThreeDiv.style.backgroundColor = 'red', optionTwoDiv.style.color = 'white', answerImageDiv.innerHTML = `<img src="../../assets/images/wrong-answer-image.png">`, userAnswerToShowInHeading.textContent = 'Incorrect');
-                    console.log('option-2: ', userelectedQuestion.val())
+
                 } else if (userelectedQuestion.val() == 3) {
                     questionExplaination.textContent = `${dataArray[currentTopic].explanation}`;
                     alreadyAnswered = false;
-                    console.log(correctQestion.val() == userelectedQuestion.val())
-                    console.log('This is correct answer: ', correctQestion.val());
-                    console.log('This is correct answer: ', userelectedQuestion.val());
-                    console.log(correctQestion.val() == userelectedQuestion.val());
                     correctQestion.val() == userelectedQuestion.val() ? (optionThreeDiv.style.backgroundColor = 'green', optionThreeDiv.style.color = 'white', answerImageDiv.innerHTML = `<img src="../../assets/images/right-answer-image.png">`, userAnswerToShowInHeading.textContent = 'Correct') : (optionThreeDiv.style.backgroundColor = 'red', optionThreeDiv.style.color = 'white', answerImageDiv.innerHTML = `<img src="../../assets/images/wrong-answer-image.png">`, userAnswerToShowInHeading.textContent = 'Incorrect');
                     console.log('option-3: ', userelectedQuestion.val())
 
                 }
                 const userSelctedAnswer = userelectedQuestion.val();
-                console.log('This is user selected answer: ' + userSelctedAnswer)
-                console.log(topic.val());
+
                 if (topic.val() == dataArray[currentTopic].topic) {
 
                 } else {
-                    console.log('This is the topic in firestore: ' + topic.val())
-                    console.log('This is the topic in local: ' + dataArray[currentTopic].topic)
+    
                 }
                 questionContainer.innerHTML = `<p>${dataArray[currentTopic].question}</p>`;
                 optionOneDiv.innerHTML = `<p>${dataArray[currentTopic].options[0]}</p>`
@@ -347,7 +330,7 @@ async function fetchJSONFromFirebase() {  // function for get the data from data
         optionOneDiv.addEventListener('click', async (e) => {
             isOptoinSelected = true;
 
-            console.log('clicked')
+
             let isUserAnswerCorrect = true;
             if (alreadyAnswered) {
                 const selectedOption = e.currentTarget.getAttribute('option-one');
@@ -381,7 +364,7 @@ async function fetchJSONFromFirebase() {  // function for get the data from data
                     const solvedTopicsRef = ref(database, 'users/' + userId + '/solvedTopics/' + `/${id}/` + dataArray[currentTopic].topic);
                     await set(solvedTopicsRef, newsolvedTopic);
 
-                    console.log("Solved question added successfully!");
+
 
                 } catch (error) {
                     console.log('Error in update: ', error)
@@ -391,7 +374,7 @@ async function fetchJSONFromFirebase() {  // function for get the data from data
         optionTwoDiv.addEventListener('click', async (e) => {
             isOptoinSelected = true;
             let isUserAnswerCorrect = true;
-            console.log('clicked')
+
             if (alreadyAnswered) {
                  questionExplaination.textContent=`${dataArray[currentTopic].explanation}`
                 const solvedTopicsRef = ref(database, 'users/' + userId + '/solvedTopics/' + `/${id}/` + dataArray[currentTopic].topic);
@@ -424,7 +407,7 @@ async function fetchJSONFromFirebase() {  // function for get the data from data
 
                     await set(solvedTopicsRef, newsolvedTopic);
 
-                    console.log("Solved question added successfully!");
+                    
 
                 } catch (error) {
                     console.log('Error in update: ', error)
@@ -434,7 +417,7 @@ async function fetchJSONFromFirebase() {  // function for get the data from data
         optionThreeDiv.addEventListener('click', async (e) => {
             isOptoinSelected = true;
             let isUserAnswerCorrect = true;
-            console.log('clicked')
+
             if (alreadyAnswered) {
                 const solvedTopicsRef = ref(database, 'users/' + userId + '/solvedTopics/' + `/${id}/` + dataArray[currentTopic].topic);
                 const selectedOption = e.currentTarget.getAttribute('option-three');
@@ -464,7 +447,7 @@ async function fetchJSONFromFirebase() {  // function for get the data from data
 
                     await set(solvedTopicsRef, newsolvedTopic);
 
-                    console.log("Solved question added successfully!");
+                
 
                 } catch (error) {
                     console.log('Error in update: ', error)
