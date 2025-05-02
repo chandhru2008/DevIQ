@@ -115,13 +115,17 @@ async function fetchJSONFromFirebase() {  // function for get the data from data
         console.log(currentTopic);
         if(currentTopic >= dataArray.length){
             const body = document.body;
-            body.innerHTML = `<p>See your score</p>`;
+            body.innerHTML = `<p id="redirect-button">See your score</p>`;
             body.style.display = "flex";
             body.style.alignItems = "center";
             body.style.justifyContent = "center";
             body.style.height = "100dvh";
             return ;
         }
+
+        document.getElementById('redirect-button').addEventListener('click',()=>{
+            window.location.href=`../../pages/review-page.html?language=${id}`
+        })
         console.log((100/dataArray.length) * (currentTopic+1));
         currentQuestion.textContent = `${currentTopic + 1}`
         totalQuestion.textContent = `${dataArray.length}`
