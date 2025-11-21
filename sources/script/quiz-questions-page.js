@@ -83,14 +83,14 @@ async function fetchJSONFromFirebase() {  // function for get the data from data
     const dbRef = ref(database, "questions/");
     const snapshot = await get(dbRef);
   
+    console.log("userId", userId)
     const numberOfQuestionUsersolved = ref(database, 'users/' + userId + '/solvedTopics/' + `${id}`);
 
 
-    const userSolvedQuestions = await get(numberOfQuestionUsersolved);
-    let count = 0;
-    userSolvedQuestions.forEach((d)=>{
-        count++;
-    });
+    const userSolvedQuestions = Object.keys((await get(numberOfQuestionUsersolved)).val());
+    let count =   userSolvedQuestions.reduce((accumulator) => {
+        return accumulator + 1;
+    }, 0);
 
     let currentTopic = count;
 
