@@ -1,7 +1,7 @@
 // Import Firebase
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js";
 import { getDatabase, ref, set, get, update, push } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-database.js";
-import { getAuth,  onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-auth.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-auth.js";
 
 // Your Firebase config
 const firebaseConfig = {
@@ -58,7 +58,7 @@ uploadJSONToFirebase();
 
 
 //========================= Fetching the data from real time data base and handle logic's ==============================
-const container = document.getElementById('container'); 
+const container = document.getElementById('container');
 const nextButton = document.getElementById('next-button');
 const preButton = document.getElementById('pre-button');
 const questionContainer = document.getElementById('question');
@@ -82,20 +82,25 @@ let dataArray = [];
 async function fetchJSONFromFirebase() {  // function for get the data from data base
     const dbRef = ref(database, "questions/");
     const snapshot = await get(dbRef);
-  
+
     console.log("userId", userId)
     const numberOfQuestionUsersolved = ref(database, 'users/' + userId + '/solvedTopics/' + `${id}`);
 
+    let count = null;
 
-    const userSolvedQuestions = Object.keys((await get(numberOfQuestionUsersolved)).val());
-    let count =   userSolvedQuestions.reduce((accumulator) => {
-        return accumulator + 1;
-    }, 0);
+    const userSolvedQuestions = (await get(numberOfQuestionUsersolved)).val();
+    console.log("User solved question : ", userSolvedQuestions)
+    if (!userSolvedQuestions) {
+        count = 0;
+    } else {
+        count = Object.keys(userSolvedQuestions).reduce((accumulator) => {
+            return accumulator + 1;
+        }, 1);
+    }
 
     let currentTopic = count;
 
     console.log(currentProgress);
-    console.log(currentTopic);
 
     if (snapshot.exists()) {
         const data = snapshot.val();
@@ -107,26 +112,26 @@ async function fetchJSONFromFirebase() {  // function for get the data from data
 
         console.log(dataArray)
         currentProgress.style.width = `${(100 / dataArray.length) * (currentTopic)}%`;
-        if(currentTopic>0){
+        if (currentTopic > 0) {
             console.log(currentTopic);
-           preButton.style.zIndex = '1'
+            preButton.style.zIndex = '1'
         }
         console.log(dataArray.length)
         console.log(currentTopic);
-        if(currentTopic >= dataArray.length){
+        if (currentTopic >= dataArray.length) {
             const body = document.body;
             body.innerHTML = `<p id="redirect-button">See your score</p>`;
             body.style.display = "flex";
             body.style.alignItems = "center";
             body.style.justifyContent = "center";
             body.style.height = "100dvh";
-            return ;
+            return;
         }
 
-        document.getElementById('redirect-button').addEventListener('click',()=>{
-            window.location.href=`../../pages/review-page.html?language=${id}`
-        })
-        console.log((100/dataArray.length) * (currentTopic+1));
+        // document.getElementById('redirect-button').addEventListener('click', () => {
+        //     window.location.href = `../../pages/review-page.html?language=${id}`
+        // })
+        console.log((100 / dataArray.length) * (currentTopic + 1));
         currentQuestion.textContent = `${currentTopic + 1}`
         totalQuestion.textContent = `${dataArray.length}`
         userAnswerToShowInHeading.textContent = 'Pick an option';
@@ -142,18 +147,18 @@ async function fetchJSONFromFirebase() {  // function for get the data from data
         if (userelectedQuestion.val() == 1) {
             alreadyAnswered = false;
             isOptoinSelected = true;
-            questionExplaination.textContent=`${dataArray[count].explanation}`
+            questionExplaination.textContent = `${dataArray[count].explanation}`
             correcAnswerRef == userelectedQuestion.val() ? (optionOneDiv.style.backgroundColor = 'green', optionOneDiv.style.color = 'white', answerImageDiv.innerHTML = `<img src="../../assets/images/right-answer-image.png">`, userAnswerToShowInHeading.textContent = 'Correct') : (optionOneDiv.style.backgroundColor = 'red', optionOneDiv.style.color = 'white', answerImageDiv.innerHTML = `<img src="../../assets/images/wrong-answer-image.png">`, userAnswerToShowInHeading.textContent = 'Incorrect');
         } else if (userelectedQuestion.val() == 2) {
             alreadyAnswered = false;
             isOptoinSelected = true;
-             questionExplaination.textContent=`${dataArray[0].explanation}`
+            questionExplaination.textContent = `${dataArray[0].explanation}`
             correcAnswerRef == userelectedQuestion.val() ? (optionTwoDiv.style.backgroundColor = 'green', optionTwoDiv.style.color = 'white', answerImageDiv.innerHTML = `<img src="../../assets/images/right-answer-image.png">`, userAnswerToShowInHeading.textContent = 'Correct') : (optionTwoDiv.style.backgroundColor = 'red', optionTwoDiv.style.color = 'white', answerImageDiv.innerHTML = `<img src="../../assets/images/wrong-answer-image.png">`, userAnswerToShowInHeading.textContent = 'Incorrect');
         } else if (userelectedQuestion.val() == 3) {
             alreadyAnswered = false;
             isOptoinSelected = true;
-             questionExplaination.textContent=`${dataArray[0].explanation}`
-            correcAnswerRef == userelectedQuestion.val() ? (optionThreeDiv.style.backgroundColor = 'green', optionThreeDiv.style.color = 'white', answerImageDiv.innerHTML = `<img src="../../assets/images/right-answer-image.png">`, userAnswerToShowInHeading.textContent = 'Correct') : (optionThreeDiv.style.backgroundColor = 'red',  optionThreeDiv.style.color = 'white', answerImageDiv.innerHTML = `<img src="../../assets/images/wrong-answer-image.png">`, userAnswerToShowInHeading.textContent = 'Incorrect');
+            questionExplaination.textContent = `${dataArray[0].explanation}`
+            correcAnswerRef == userelectedQuestion.val() ? (optionThreeDiv.style.backgroundColor = 'green', optionThreeDiv.style.color = 'white', answerImageDiv.innerHTML = `<img src="../../assets/images/right-answer-image.png">`, userAnswerToShowInHeading.textContent = 'Correct') : (optionThreeDiv.style.backgroundColor = 'red', optionThreeDiv.style.color = 'white', answerImageDiv.innerHTML = `<img src="../../assets/images/wrong-answer-image.png">`, userAnswerToShowInHeading.textContent = 'Incorrect');
 
         }
         questionContainer.innerHTML = `<p>${dataArray[count].question}</p>`;
@@ -162,7 +167,7 @@ async function fetchJSONFromFirebase() {  // function for get the data from data
         optionThreeDiv.innerHTML = `<p>${dataArray[count].options[2]}</p>`
 
 
-       
+
         nextButton.addEventListener('click', async () => {
 
             userAnswerToShowInHeading.textContent = 'Pick an option'
@@ -242,6 +247,7 @@ async function fetchJSONFromFirebase() {  // function for get the data from data
             userAnswerToShowInHeading.textContent = 'Pick an option'
             if (currentTopic == 1) {
                 preButton.style.zIndex = '-1';
+                preButton.style.opacity = '0'
             }
             alreadyAnswered = false;
             isOptoinSelected = true;
@@ -289,7 +295,7 @@ async function fetchJSONFromFirebase() {  // function for get the data from data
                         questionExplaination.textContent = `${dataArray[currentTopic].explanation}`;
                         optionOneDiv.style.backgroundColor = 'green';
                         optionOneDiv.style.color = 'white';
-                        
+
                         answerImageDiv.innerHTML = `<img src="../../assets/images/right-answer-image.png">`;
                         userAnswerToShowInHeading.textContent = 'Correct'
 
@@ -319,14 +325,14 @@ async function fetchJSONFromFirebase() {  // function for get the data from data
                 if (topic.val() == dataArray[currentTopic].topic) {
 
                 } else {
-    
+
                 }
                 questionContainer.innerHTML = `<p>${dataArray[currentTopic].question}</p>`;
                 optionOneDiv.innerHTML = `<p>${dataArray[currentTopic].options[0]}</p>`
                 optionTwoDiv.innerHTML = `<p>${dataArray[currentTopic].options[1]}</p>`
                 optionThreeDiv.innerHTML = `<p>${dataArray[currentTopic].options[2]}</p>`
 
-                finishQuize.style.display='none';
+                finishQuize.style.display = 'none';
 
             }
         })
@@ -338,13 +344,13 @@ async function fetchJSONFromFirebase() {  // function for get the data from data
             let isUserAnswerCorrect = true;
             if (alreadyAnswered) {
                 const selectedOption = e.currentTarget.getAttribute('option-one');
-                 questionExplaination.textContent=`${dataArray[currentTopic].explanation}`
+                questionExplaination.textContent = `${dataArray[currentTopic].explanation}`
                 if (selectedOption == dataArray[currentTopic].answer) {
                     optionOneDiv.style.backgroundColor = 'green';
                     optionOneDiv.style.color = 'white';
                     answerImageDiv.innerHTML = `<img src="../../assets/images/right-answer-image.png">`
                     userAnswerToShowInHeading.textContent = 'Correct'
-                    
+
                 } else {
                     optionOneDiv.style.backgroundColor = 'red';
                     optionOneDiv.style.color = 'white';
@@ -380,7 +386,7 @@ async function fetchJSONFromFirebase() {  // function for get the data from data
             let isUserAnswerCorrect = true;
 
             if (alreadyAnswered) {
-                 questionExplaination.textContent=`${dataArray[currentTopic].explanation}`
+                questionExplaination.textConten = `${dataArray[currentTopic].explanation}`
                 const solvedTopicsRef = ref(database, 'users/' + userId + '/solvedTopics/' + `/${id}/` + dataArray[currentTopic].topic);
                 const selectedOption = e.currentTarget.getAttribute('option-two');
                 if (selectedOption == dataArray[currentTopic].answer) {
@@ -411,7 +417,7 @@ async function fetchJSONFromFirebase() {  // function for get the data from data
 
                     await set(solvedTopicsRef, newsolvedTopic);
 
-                    
+
 
                 } catch (error) {
                     console.log('Error in update: ', error)
@@ -451,7 +457,7 @@ async function fetchJSONFromFirebase() {  // function for get the data from data
 
                     await set(solvedTopicsRef, newsolvedTopic);
 
-                
+
 
                 } catch (error) {
                     console.log('Error in update: ', error)
@@ -459,13 +465,13 @@ async function fetchJSONFromFirebase() {  // function for get the data from data
             }
         })
         const acceptButton = document.getElementsByClassName('accept')[0];
-        acceptButton.addEventListener('click',()=>{
-            window.location.href=`../../pages/review-page.html?language=${id}`;
+        acceptButton.addEventListener('click', () => {
+            window.location.href = `../../pages/review-page.html?language=${id}`;
         })
         finishQuize.addEventListener('click', async () => {
             currentProgress.style.width = `${100}%`
-            reviewAnswerAndGetScoresDiv.style.display='flex';
-            container.style.filter='blur(5px)'
+            reviewAnswerAndGetScoresDiv.style.display = 'flex';
+            container.style.filter = 'blur(5px)'
         });
 
     } else {
@@ -476,6 +482,6 @@ async function fetchJSONFromFirebase() {  // function for get the data from data
 
 fetchJSONFromFirebase();
 const hammerButton = document.getElementById('hammer');
-hammerButton.addEventListener('click',()=>{
-header.classList.toggle('header-show');
+hammerButton.addEventListener('click', () => {
+    header.classList.toggle('header-show');
 });
